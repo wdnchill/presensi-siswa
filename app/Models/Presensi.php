@@ -9,8 +9,7 @@ class Presensi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['presensi', 'user_id', 'kelas_id'];
-
+    protected $fillable = ['presensi', 'user_id', 'kelas_id','siswa_id'];
 
     public function siswas()
     {

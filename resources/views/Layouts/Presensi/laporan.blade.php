@@ -57,7 +57,6 @@
                     @foreach ($presensis as $presensi)
                         <tr data-kelas="{{ $presensi->siswas->kelas_id }}">
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $presensi->users->name }}</td>
                             <td>{{ $presensi->siswas->nama_lengkap }}</td>
                             <td>{{ $presensi->siswas->nisn }}</td>
                             <td>{{ $presensi->siswas->nis }}</td>
@@ -79,9 +78,6 @@
                             </td>
                         </tr>
                     @endforeach
-                    <div class="mt-3">
-                        <strong>NAMA GURU: {{ $presensis[0]->users->name }}</strong>
-                    </div>
                 @else
                     <tr>
                         <td colspan="9">

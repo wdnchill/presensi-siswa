@@ -196,6 +196,4 @@ class PresensiController extends Controller
 
         return view('Layouts.Presensi.laporan', compact('presensis', 'kelas'));
     }
-
-
 }

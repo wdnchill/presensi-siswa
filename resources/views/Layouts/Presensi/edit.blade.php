@@ -14,26 +14,18 @@
     <form action="{{ route('presensi.update', $presensi->id) }}" method="post">
         @csrf
         @method('PUT')
-        @foreach ($kelas as $kelasItem)
-            <input value="{{ $kelasItem->id }}" type="hidden" name="kelas_id">
-        @endforeach
 
+        <input value="{{ old('kelas_id',$presensi->kelas_id) }}" type="hidden" name="kelas_id">
         <select class="form-select mb-3" id="user" name="user_id">
             <option selected disabled>Pilih Guru/Petugas</option>
             @foreach ($users as $user)
-                <option value="{{old('user_id', $presensi->user_id)
-                 }}" {{ old('user_id', $presensi->user_id) == $user->id ? 'selected' : '' }}>
+            <option value="{{ $user->id }}" {{ old('user_id', $presensi->user_id) == $user->id ? 'selected' : '' }}>
                     {{ $user->name }}
                 </option>
             @endforeach
         </select>
-       <select class="form-select mb-3" id="siswa" name="siswa_id" disabled>
-    @foreach ($siswas as $siswa)
-        <option value="{{ old('siswa_id', $presensi->siswa_id) }}" {{ old('siswa_id', $presensi->siswa_id) == $siswa->id ? 'selected' : '' }}>
-            {{ $siswa->nama_lengkap }}
-        </option>
-    @endforeach
-    </select>
+
+    <input value="{{ old('siswa_id', $presensi->siswa_id) }}" name="siswa_id" type="hidden">
 
         <div class="form-group mb-3">
             <label class="form-label">Keterangan :</label>

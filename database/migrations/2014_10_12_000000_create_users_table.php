@@ -14,10 +14,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('username')->unique()->nullable(); // Add this line
+            $table->string('username')->unique()->nullable(); 
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role',['admin','walas','guru'])->default('admin');
+            $table->enum('role',['admin','walas','guru'])->default('guru');
             $table->string('imguser');
             $table->timestamps();
         });
