@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class DummyUsersSeeder extends Seeder
@@ -17,28 +17,31 @@ class DummyUsersSeeder extends Seeder
             [
                 'name' => 'admin',
                 'email' => 'admin@gmail.com',
+                'username' => 'admin',
+                'password' => Hash::make('123456'),
                 'role' => 'admin',
-                'password' => bcrypt('123456'),
-                'imguser' => 'christy.jpg' // Nama berkas gambar di penyimpanan
+                'imguser' => '',
             ],
             [
                 'name' => 'guru',
                 'email' => 'guru@gmail.com',
+                'username' => 'guru',
+                'password' => Hash::make('123456'),
                 'role' => 'guru',
-                'password' => bcrypt('123456'),
-                'imguser' => 'Marsha.jpeg' // Nama berkas gambar di penyimpanan
+                'imguser' => 'Marsha.jpeg',
             ],
             [
                 'name' => 'walas',
                 'email' => 'walas@gmail.com',
+                'username' => 'walas',
+                'password' => Hash::make('123456'),
                 'role' => 'walas',
-                'password' => bcrypt('123456'),
-                'imguser' => 'we.jpeg' // Nama berkas gambar di penyimpanan
+                'imguser' => '',
             ],
         ];
 
-        foreach ($userData as $key => $val) {
-          User::create($val);
+        foreach ($userData as $userData) {
+            User::create($userData);
         }
     }
 }

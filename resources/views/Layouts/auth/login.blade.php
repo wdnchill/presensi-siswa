@@ -20,23 +20,20 @@
                     <div class="col-md-8 col-lg-6 col-xxl-3">
                         <div class="card mb-0">
                             <div class="card-body">
-                                <a href="{{ route('login') }}"
-                                    class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                    <img src="{{ asset('assets/images/logos/logo.png') }}" width="180"
-                                        alt="">
+                                <a href="{{ route('login') }}" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                                    <img src="{{ asset('assets/images/logos/logo.png') }}" width="180" alt="">
                                 </a>
                                 <h3 class="text-center text-bg-gray">Aplikasi Presensi Siswa Citra Negara</h3>
-                                <form action="" method="post">
+                                <form action="{{ route('login') }}" method="post">
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Email</label>
-                                        <input type="email" name="email" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        <label for="usernameOrEmail" class="form-label">Username or Email</label>
+                                        <input type="text" name="username_or_email" class="form-control"
+                                            id="usernameOrEmail" aria-describedby="usernameOrEmailHelp">
                                     </div>
                                     <div class="mb-4">
                                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                                        <input type="password" name="password" class="form-control"
-                                            id="exampleInputPassword1">
+                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-4">
                                     </div>
