@@ -20,9 +20,5 @@ class Kelas extends Model
     {
         return $this->hasMany(Presensi::class, 'siswa_id'); // Correct the foreign key reference to 'kelas_id'
     }
-      public function qrCode()
-    {
-        return $this->hasMany(qrCode::class, 'kelas_id'); // Correct the foreign key reference to 'kelas_id'
-    }
     
 }

@@ -62,7 +62,7 @@ class SiswaController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
             'kelas_id' => $request->kelas_id,
         ]);
-           //redirect to index
+           
            return redirect()->route('siswa.create')->with(['success' => 'Data Berhasil Ditambahkan!']);
     }
 

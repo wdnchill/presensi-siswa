@@ -11,14 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('presensis', function (Blueprint $table) {
+            Schema::create('presensis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kelas_id')->references('id')->on('kelas');
-            $table->foreignId('siswa_id')->references('id')->on('siswas');
-            $table->foreignId('user_id')->references('id')->on('users');
+            // $table->foreignId('kelas_id')->references('id')->on('kelas');
+            $table->foreignId('kelas_id')->constrained('kelas');
+            $table->foreignId('siswa_id')->constrained('siswas');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('mapel_id')->constrained('mapels');
             $table->enum('presensi', ['Hadir', 'Alfa', 'Sakit', 'Izin']);
             $table->timestamps();
         });
+
+
     }
 
     /**

@@ -9,7 +9,7 @@ class Presensi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['presensi', 'user_id', 'kelas_id','siswa_id'];
+    protected $fillable = ['presensi', 'user_id', 'kelas_id','siswa_id','mapel_id'];
 
     public function siswas()
     {
@@ -23,5 +23,10 @@ class Presensi extends Model
     public function users()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+
+     public function mapels()
+    {
+        return $this->belongsTo(Mapel::class,'mapel_id');
     }
 }

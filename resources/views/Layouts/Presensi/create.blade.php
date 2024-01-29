@@ -12,14 +12,16 @@
          @foreach ($kelas as $kelasItem)
              <input value="{{ $kelasItem->id }}" type="hidden" name="kelas_id">
          @endforeach
+         <select class="form-select mb-3" id="user" name="mapel_id">
+            <option selected disabled>Pilih Mata pelajaran</option>
+            @foreach ($mapel as $mapelItem)
+            <option value="{{ $mapelItem->id }}" {{ old('mapel_id', $mapelItem->namaMapel) == $mapelItem->id ? 'selected' : '' }}>
+                    {{ $mapelItem->namaMapel }}
+                </option>
+            @endforeach
+        </select>
 
          <div class="card-body">
-             <select class="form-select" id="user" name="user_id">
-                 <option selected>Pilih Guru/Petugas</option>
-                 @foreach ($users as $usersItem)
-                     <option value="{{ $usersItem->id }}" required>{{ $usersItem->name }}</option>
-                 @endforeach
-             </select>
              <div class="table-responsive">
                  <table class="table table-hover" id="" style="width:100%" cellspacing="0">
                      <thead>
@@ -40,6 +42,7 @@
                                  <td>{{ $siswa->nisn }}</td>
                                  <td>
                                      <input type="hidden" name="siswa_id[]" value="{{ $siswa->id }}">
+                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                      <div class="btn-group d-flex" role="group"
                                          aria-label="Vertical radio toggle button group">
                                          <input type="radio" class="btn-check" name="presensi[{{ $siswa->id }}]"

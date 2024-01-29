@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Presensi;
 use App\Models\Siswa;
+use App\Models\Mapel;
 use App\Models\Kelas;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,16 +19,16 @@ class PresensiController extends Controller
 
      public function index()
      {
-         // Retrieve presensi data with related siswas and kelas, sorted by created_at
+        
          $presensis = Presensi::with('siswas', 'kelas','users')
              ->orderBy('created_at')
              ->get();
 
         
          $kelas = Kelas::all();
-
+         $mapel = Mapel::all();
          $users = User::all();
-         return view('Layouts.Presensi.index', compact('presensis', 'kelas' , 'users'));
+         return view('Layouts.Presensi.index', compact('presensis', 'kelas' , 'users','mapel'));
      }
 
 
@@ -37,8 +38,8 @@ class PresensiController extends Controller
         $kelas = Kelas::all();
         $siswas = Siswa::all();
         $users = User::all();
-
-        return view('Layouts.Presensi.create', compact('kelas', 'siswas','users'));
+        $mapel = Mapel::all();
+        return view('Layouts.Presensi.create', compact('kelas', 'siswas','users','mapel'));
     }
 
 
@@ -52,6 +53,7 @@ class PresensiController extends Controller
           'siswa_id' => 'required',
           'kelas_id' => 'required',
           'user_id' => 'required',
+          'mapel_id' => 'required',
           'presensi' => 'required|array',
           'presensi.*' => 'required|in:Hadir,Alfa,Sakit,Izin',
       ],[
@@ -61,9 +63,9 @@ class PresensiController extends Controller
 
       ]);
       
-  if ($request->user_id === 'Pilih Guru/Petugas' || count($request->presensi) === 0) {
+  if ($request->user_id === 'Pilih Mata pelajaran' || count($request->presensi) === 0) {
         return redirect()->route('presensi.create')->with([
-            'error' => 'Kolom Guru/Petugas Absen wajib diisi.'
+            'error' => 'Kolom Matapelajaran  wajib diisi.'
         ])->withInput();
     }
 
@@ -72,6 +74,7 @@ class PresensiController extends Controller
               'kelas_id' => $request->kelas_id,
               'siswa_id' => $siswa_id,
               'user_id'  => $request->user_id,
+              'mapel_id'  => $request->mapel_id,
               'presensi' => $presensi,
           ]);
       }
@@ -90,8 +93,10 @@ class PresensiController extends Controller
     $kelas = Kelas::where('id', $kelas_id)->get();
     $siswas = Siswa::where('kelas_id', $kelas_id)->get();
     $users = User::all();
+    $mapel = Mapel::all();
 
-    return view('Layouts.Presensi.create', compact('presensis', 'kelas', 'siswas','users'));
+
+    return view('Layouts.Presensi.create', compact('presensis', 'kelas', 'siswas','users','mapel'));
 }
 
 
@@ -102,7 +107,8 @@ class PresensiController extends Controller
     $users = User::all();
     $kelas = Kelas::all();
     $siswas = Siswa::all();
-    return view('Layouts.Presensi.edit', compact('presensi','siswas','kelas','users'));
+    $mapel = Mapel::all();
+    return view('Layouts.Presensi.edit', compact('presensi','siswas','kelas','users','mapel'));
 }
 
 
@@ -113,8 +119,10 @@ class PresensiController extends Controller
     {
         $this->validate($request, [
             'presensi' => 'required|in:Hadir,Alfa,Sakit,Izin',
-            'user_id' => 'required',
             'kelas_id' => 'required',
+            'user_id' => 'required',
+            'siswa_id' => 'required',
+            'mapel_id' => 'required',
         ]);
 
         $presensi = Presensi::findOrFail($id);
@@ -123,7 +131,8 @@ class PresensiController extends Controller
             'presensi' => $request->presensi,
             'user_id' =>  $request->user_id,
             'kelas_id' => $request->kelas_id,
-            'siswa_id' => $request->siswa_id, 
+            'siswa_id' => $request->siswa_id,
+            'mapel_id' => $request->mapel_id, 
         ]);
 
         return redirect()->route('laporan')->with(['success' => 'Data Berhasil Diubah!']);
@@ -145,9 +154,10 @@ class PresensiController extends Controller
     public function laporan()
     {
       // Build the query for Kelas
+        $mapels = Mapel::all();
         $kelas = Kelas::all();
-        $presensis = Presensi::with('siswas', 'kelas','users')->get();
-        return view('Layouts.Presensi.laporan', compact('presensis', 'kelas'));
+        $presensis = Presensi::with('siswas', 'kelas','users','mapels')->get();
+        return view('Layouts.Presensi.laporan', compact('presensis', 'kelas','mapels'));
 
     }
     public function filter(Request $request)

@@ -51,10 +51,18 @@
                             <span class="hide-menu">Data Siswa</span>
                         </a>
                     </li>
+                    <li class="sidebar-item{{ Request::is('mapel*') ? ' active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('mapel.index') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-notebook"></i>
+                            </span>
+                            <span class="hide-menu">Data Mapel</span>
+                        </a>
+                    </li>
                     <li class="sidebar-item{{ Request::is('presensi*') ? ' active' : '' }}">
                         <a class="sidebar-link" href="{{ route('presensi.index') }}" aria-expanded="false">
                             <span>
-                                <i class="ti ti-book"></i>
+                                <i class="ti ti-writing"></i>
                             </span>
                             <span class="hide-menu">Presensi siswa</span>
                         </a>
@@ -100,7 +108,7 @@
         <li class="sidebar-item{{ Request::is('presensi*') ? ' active' : '' }}">
             <a class="sidebar-link" href="{{ route('presensi.index') }}" aria-expanded="false">
                 <span>
-                    <i class="ti ti-book"></i>
+                    <i class="ti ti-writing"></i>
                 </span>
                 <span class="hide-menu">Presensi siswa</span>
             </a>

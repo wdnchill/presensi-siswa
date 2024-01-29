@@ -16,11 +16,22 @@
         @method('PUT')
 
         <input value="{{ old('kelas_id',$presensi->kelas_id) }}" type="hidden" name="kelas_id">
+
         <select class="form-select mb-3" id="user" name="user_id">
             <option selected disabled>Pilih Guru/Petugas</option>
             @foreach ($users as $user)
             <option value="{{ $user->id }}" {{ old('user_id', $presensi->user_id) == $user->id ? 'selected' : '' }}>
                     {{ $user->name }}
+                </option>
+            @endforeach
+        </select>
+
+        <select class="form-select mb-3" id="mapel" name="mapel_id">
+            <option selected disabled>Perbarui matapelajaran</option>
+            @foreach ($mapel as $mapels)
+            <option value="{{old ('mapel_id',$mapels->id) }}" 
+                {{ old('mapel_id', $presensi->mapel_id) == $mapels->id ? 'selected' : '' }}>
+                    {{ $mapels->namaMapel }}
                 </option>
             @endforeach
         </select>
@@ -34,7 +45,7 @@
                     {{ $presensi->presensi === 'Hadir' ? 'checked' : '' }} required>
                 <label class="btn btn-outline-success" for="hadir">Hadir</label>
 
-                <input type="radio" class="btn-check" name="presensi" id="alfa" value="Alpa"
+                <input type="radio" class="btn-check" name="presensi" id="alfa" value="Alfa"
                     {{ $presensi->presensi === 'Alpa' ? 'checked' : '' }} required>
                 <label class="btn btn-outline-danger" for="alfa">Alfa</label>
 

@@ -42,12 +42,13 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Guru</th>
                     <th>Nama</th>
                     <th>Nisn</th>
                     <th>Nis</th>
                     <th>kelas</th>
                     <th>Absensi</th>
+                    <th>Guru</th>
+                    <th>Matapelajaran</th>
                     <th>Bln/Tgl/Thn</th>
                     <th>Action</th>
                 </tr>
@@ -62,6 +63,8 @@
                             <td>{{ $presensi->siswas->nis }}</td>
                             <td>{{ $presensi->kelas->kelas }}</td>
                             <td>{{ $presensi->presensi }}</td>
+                            <td>{{ $presensi->users->name }}</td>
+                            <td>{{ $presensi->mapels->namaMapel }}</td>
                             <td>{{ $presensi->created_at ? $presensi->created_at->format('d F Y') : 'N/A' }}</td>
                             <td>
                                 <div class="list-group list-group-horizontal" role="group" aria-label="Aksi">
