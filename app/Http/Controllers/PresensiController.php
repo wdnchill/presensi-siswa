@@ -12,43 +12,26 @@ use Illuminate\Http\RedirectResponse;
 
 
 class PresensiController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
+    {
 
      public function index()
      {
-        
-         $presensis = Presensi::with('siswas', 'kelas','users')
-             ->orderBy('created_at')
-             ->get();
-
-        
          $kelas = Kelas::all();
-         $mapel = Mapel::all();
-         $users = User::all();
-         return view('Layouts.Presensi.index', compact('presensis', 'kelas' , 'users','mapel'));
+         return view('Layouts.Presensi.index', compact('kelas'));
      }
 
 
     public function create(Request $request)
     {
-        // Build the query for Kelas
         $kelas = Kelas::all();
         $siswas = Siswa::all();
-        $users = User::all();
         $mapel = Mapel::all();
-        return view('Layouts.Presensi.create', compact('kelas', 'siswas','users','mapel'));
+        return view('Layouts.Presensi.create', compact('kelas', 'siswas','mapel'));
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
      public function store(Request $request)
      {
-       // Validate the input data
+
       $this->validate($request, [
           'siswa_id' => 'required',
           'kelas_id' => 'required',
@@ -79,24 +62,19 @@ class PresensiController extends Controller
           ]);
       }
 
-      // Redirect back to the index page with a success message
       return redirect()->route('presensi.index')->with(['success' => 'Data Berhasil Ditambahkan!']);
      }
 
-    /**
-     * Display the specified resource.
-     */
+    
   public function show($kelas_id)
 {
-    $presensis = Presensi::with('siswas', 'kelas')
-        ->where('kelas_id', $kelas_id)->orderBy('created_at')->get();
     $kelas = Kelas::where('id', $kelas_id)->get();
     $siswas = Siswa::where('kelas_id', $kelas_id)->get();
     $users = User::all();
     $mapel = Mapel::all();
 
 
-    return view('Layouts.Presensi.create', compact('presensis', 'kelas', 'siswas','users','mapel'));
+    return view('Layouts.Presensi.create', compact('kelas', 'siswas','users','mapel'));
 }
 
 
@@ -163,45 +141,41 @@ class PresensiController extends Controller
     public function filter(Request $request)
     {
 
-        // Validate the input data
         $request->validate([
             'TanggalMulai' => 'nullable|date',
             'TanggalSelesai' => 'nullable|date|after_or_equal:TanggalMulai',
-            'kelas_id' => 'nullable|exists:kelas,id', // Add this validation rule for kelas_id
+            'kelas_id' => 'nullable|exists:kelas,id', 
         ]);
 
-        // Retrieve the input dates and kelas_id
+
         $TanggalMulai = $request->input('TanggalMulai');
         $TanggalSelesai = $request->input('TanggalSelesai');
         $kelas_id = $request->input('kelas_id');
 
-        // Build the query for Kelas
-        $siswas = Siswa::all();
+          $siswas = Siswa::all();
         $kelas = Kelas::all();
 
-        // Build the query for Presensi
+    
         $presensiQuery = Presensi::with('siswas', 'kelas');
 
-        // Filter by start date if provided
+    
         if ($TanggalMulai) {
             $presensiQuery->whereDate('created_at', '>=', $TanggalMulai);
         }
 
-        // Filter by end date if provided
+    
         if ($TanggalSelesai) {
             $presensiQuery->whereDate('created_at', '<=', $TanggalSelesai);
         }
 
-        // Filter by kelas_id if provided
         if ($kelas_id) {
             $presensiQuery->whereHas('kelas', function ($query) use ($kelas_id) {
                 $query->where('id', $kelas_id);
             });
         }
 
-        // Retrieve presensi data with related siswas and kelas, sorted by kelas
         $presensis = $presensiQuery
-            ->orderBy('created_at') // Order by the created_at column
+            ->orderBy('created_at') 
             ->get();
 
         return view('Layouts.Presensi.laporan', compact('presensis', 'kelas'));

@@ -24,18 +24,18 @@
                                     <img src="{{ asset('assets/images/logos/logo.png') }}" width="180"
                                         alt="PRESENSI LOGO">
                                 </a>
-                                <h3 class="text-center text-bg-gray">Aplikasi Presensi Siswa Citra Negara</h3>
+                                <h3 class="text-center text-primary"><strong>Aplikasi Presensi Siswa Citra Negara</strong></h3>
                                 <form action="{{ route('login') }}" method="post">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="usernameOrEmail" class="form-label">Username or Email</label>
-                                        <input type="text" name="username_or_email" class="form-control"
-                                            id="usernameOrEmail" aria-describedby="usernameOrEmailHelp">
+                                     <input type="text" name="username_or_email" class="form-control"
+                                        id="usernameOrEmail" aria-describedby="usernameOrEmailHelp" required placeholder="Masukan username atau Email">
                                     </div>
                                     <div class="mb-4">
                                         <label for="exampleInputPassword1" class="form-label">Password</label>
                                         <input type="password" name="password" class="form-control"
-                                            id="exampleInputPassword1">
+                                            id="exampleInputPassword1" required placeholder="Masukan password">
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-4">
                                     </div>

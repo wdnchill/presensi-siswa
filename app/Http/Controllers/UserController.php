@@ -49,7 +49,7 @@ class UserController extends Controller
     
 
     $imguser = $request->file('imguser');
-    $imguser = $imguser->storeAs('public/img/profile', $imguser->hashName());
+    $imguser = $imguser->storeAs('/img/profile', $imguser->hashName());
 
     User::create([
         'name' => $request->name,

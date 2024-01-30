@@ -45,7 +45,7 @@ public function store(Request $request)
 
     $kelas = Kelas::create([
         'kelas' => $request->kelas,
-        'qrCode' => '',
+        'qrCode' => 'required',
     ]);
 
     $kelasId = $kelas->id;

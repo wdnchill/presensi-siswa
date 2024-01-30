@@ -45,7 +45,7 @@
             <tr>
                 <td colspan="6">
                     <div class="alert alert-warning">
-                        Data kosong
+                        Data user belum dimasukan.
                     </div>
                 </td>
             </tr>

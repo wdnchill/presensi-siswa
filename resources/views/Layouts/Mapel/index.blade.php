@@ -35,7 +35,7 @@
             <tr>
                 <td colspan="4">
                     <div class="alert alert-warning">
-                        Data kosong
+                        Data mapel belum dimasukan.
                     </div>
                 </td>
             </tr>

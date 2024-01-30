@@ -85,7 +85,7 @@
                     <tr>
                         <td colspan="9">
                             <div class="alert alert-warning">
-                                Data kosong
+                                Data Presensi belum di input
                             </div>
                         </td>
                     </tr>
