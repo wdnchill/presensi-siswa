@@ -14,10 +14,10 @@ class AdminController extends Controller
      return view('Layouts.index');
    }
    function guru()  {
-    return view('Layouts.index');
+    return view('Layouts.Presensi.index');
   }
   function walas()  {
-    return view('Layouts.index');
+    return view('Layouts.Presensi.laporan');
   }
   function admin()  {
     return view('Layouts.index');

@@ -8,9 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
 </head>
-
 <body>
-
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
         @include('Layouts.Partials.sidebar')
@@ -18,7 +16,6 @@
             @include('Layouts.Partials.navbar')
             <div class="container-fluid">
                 <div class="content">
-                    <div class="card">      
                     <div id="notificationArea" class="notification-area">
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -32,10 +29,13 @@
                         @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
                             </div>
                         @endif
-                    </div>   
+                    </div>
+
+                    <div class="card">
                         <div class="card-body">
                             <h5 class="card-title fw-semibold mb-4">@yield('sub-title')</h5>
                             @yield('content')
@@ -91,24 +91,39 @@
             $('#tabledata').DataTable({
                 responsive: true,
                 lengthChange: false,
-                searching: false,
+                searching: true,
                 paging: false,
                 info: false,
                 ordering: false,
                 dom: 'Bfrtip',
-                buttons: [{
-                    extend: 'excelHtml5',
-                    exportOptions: {
-                        columns: [1, 2, 3, 4, 5, 6, 7],
-                        modifier: {
-                            selected: true
+                buttons: [
+                    'copy',
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5, 6, 7, 8],
+                            modifier: {
+                                selected: true
+                            }
+                        },
+                        customize: function(xlsx) {
+                            var sheet = xlsx.xl.worksheets['Laporan absen siswa.xml'];
+                            // Your customization code here if necessary
                         }
                     },
-                    customize: function(xlsx) {
-                        var sheet = xlsx.xl.worksheets['Laporan absen siswa.xml'];
-                        // Add custom XML here if needed
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                        }
                     }
-                }]
+                ]
             });
         });
     </script>
@@ -158,4 +173,5 @@
         });
     </script>
 </body>
+
 </html>

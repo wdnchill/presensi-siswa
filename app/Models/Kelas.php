@@ -14,11 +14,11 @@ class Kelas extends Model
 
     public function siswas()
     {
-        return $this->hasMany(Siswa::class, 'kelas_id'); // Correct the foreign key reference to 'kelas_id'
+        return $this->hasMany(Siswa::class, 'kelas_id');
     }
     public function presnsi()
     {
-        return $this->hasMany(Presensi::class, 'siswa_id'); // Correct the foreign key reference to 'kelas_id'
+        return $this->hasMany(Presensi::class, 'siswa_id'); 
     }
     
 }
