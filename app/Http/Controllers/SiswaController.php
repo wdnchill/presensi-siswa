@@ -10,30 +10,23 @@ use Illuminate\Http\RedirectResponse;
 
 class SiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $kelas = Kelas::all();
-                // Ambil semua data Siswa dan kelas untuk ditampilkan di halaman index
-                $siswas = Siswa::with('kelas')->get()->sortBy('id');
+        $siswas = Siswa::all();
 
         return view('Layouts.Siswa.index', compact('siswas','kelas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+   
     public function create()
     {
         $kelas = Kelas::all();
         return view('Layouts.Siswa.create',compact('kelas'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Request $request)
     {
         //validate form
@@ -66,32 +59,21 @@ class SiswaController extends Controller
            return redirect()->route('siswa.create')->with(['success' => 'Data Berhasil Ditambahkan!']);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-               //get post by ID
-               $siswa = Siswa::findOrFail($id);
-
-               //render view with post
-               return view('Layouts.Siswa.edit', compact('siswa'));
+         $siswas = Siswa::findOrFail($id);
+         $kelas = Kelas::all();
+               return view('Layouts.Siswa.edit', compact('siswas','kelas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-public function update(Request $request, string $id)
-{
-    //validate form
+    
+    public function update(Request $request, string $id)
+    {
     $this->validate($request, [
         'nis' => 'required|numeric',
         'nisn' => 'required|numeric',
@@ -100,9 +82,8 @@ public function update(Request $request, string $id)
         'kelas_id' => 'required'
     ]);
 
-    //get post by ID
-    $siswa = Siswa::findOrFail($id);
-    $siswa->update([
+    $siswas = Siswa::findOrFail($id);
+    $siswas->update([
             'nisn' => $request->nis,
             'nis' => $request->nis,
             'nama_lengkap' => $request->nama_lengkap,
@@ -110,23 +91,17 @@ public function update(Request $request, string $id)
             'kelas_id' => $request->kelas_id,
     ]);
 
-    //redirect to index
     return redirect()->route('siswa.index')->with(['success' => 'Data Berhasil Diubah!']);
 }
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-         //get post by ID
-         $siswa = Siswa::findOrFail($id);
 
-         //delete post
-         $siswa->delete();
+         $siswas = Siswa::findOrFail($id);
 
-         //redirect to index
+         $siswas->delete();
+
          return redirect()->route('siswa.index')->with(['success' => 'Data Berhasil Dihapus!']);
         }
 
