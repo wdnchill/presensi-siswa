@@ -43,7 +43,7 @@ class SesiController extends Controller
         if (Auth::user()->role == 'admin' || Auth::user()->role == 'walas' || Auth::user()->role == 'guru') {
             // Flash a welcome message
             session()->flash('success', 'Selamat datang, ' . Auth::user()->name . '!');
-            return redirect('/beranda');
+            return redirect('');
         }
     }
 
