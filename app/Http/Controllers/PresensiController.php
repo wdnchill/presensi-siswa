@@ -63,7 +63,7 @@ class PresensiController extends Controller
 
       ]);
       
-  if ($request->user_id === 'Pilih Mata pelajaran' || count($request->presensi) === 0) {
+  if ($request->mapel_id == 'Pilih Mata pelajaran' || count($request->presensi) === 0) {
         return redirect()->route('presensi.create')->with([
             'error' => 'Kolom Matapelajaran  wajib diisi.'
         ])->withInput();
