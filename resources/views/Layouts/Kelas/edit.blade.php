@@ -6,9 +6,6 @@
 @section('sub-title')
     FORM EDIT DATA KELAS
 @endsection
-<p class="mb-0">Input data kelas</p>
-
-<div class="card-body">
     <form action="{{ route('kelas.update', $kelas->id) }}" method="post">
         @csrf
         @method('PUT')
@@ -17,8 +14,13 @@
             <input type="text" class="form-control" id="nama" name="kelas" required
                 value="{{ old('kelas', $kelas->kelas) }}">
         </div>
-        <button type="reset" class="btn btn-warning">Riset</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+     <div class="mb-3 row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <a href="{{ route('kelas.index') }}" type="button" class="btn btn-danger"><i class="ti ti-arrow-narrow-left fs-7"></i> Back</a>
+                        <button type="submit" class="btn btn-primary show-alert-submit-box">Submit</button>
+                        <button type="reset" class="btn btn-warning">Reset</button>
+                    </div>
+                </div>
     </form>
-</div>
 @endsection

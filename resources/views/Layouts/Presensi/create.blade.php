@@ -31,14 +31,15 @@
                 </select>
             </div>
         </div>
-          @if ($kelas->isEmpty())
-        <div class="alert alert-warning">
-            <p>Data siswa belum di masukan.</p>
-        </div>
-    @else
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            @foreach ($siswas as $siswa)
-                <div class="col mb-3">
+
+        @if ($siswas->isEmpty())
+            <div class="alert alert-warning">
+                <p>Data siswa belum dimasukkan.</p>
+            </div>
+        @else
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach ($siswas as $siswa)
+                   <div class="col mb-3">
                     <div class="card h-100">
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted"># {{ $loop->iteration }}</h6>
@@ -78,9 +79,10 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
-        </div>
-    @endif
+                @endforeach
+            </div>
+        @endif
+
         <div class="mb-3 row">
             <div class="col-md-12 text-center">
                 <button type="submit" class="btn btn-outline-info show-alert-submit-box" id="submitBtn"

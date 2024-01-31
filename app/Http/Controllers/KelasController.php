@@ -50,19 +50,19 @@ public function store(Request $request)
 
     $kelasId = $kelas->id;
 
-    // Generate QR code with dynamic class ID in the route
+   
     $qrCode = QRCode::format('png')->generate(url("/presensi/{$kelasId}"));
 
-    // Define the output file path
+    
     $outputFile = '/qrCodekelas/qr-' . $kelasId . '.png';
 
-    // Save the QR code to storage
+
     Storage::disk('public')->put($outputFile, $qrCode);
 
-    // Update the QR code path in the Kelas model
+ 
     $kelas->update(['qrCode' => $outputFile]);
 
-    // Trigger the QRCodeGenerated event
+  
     event(new QRCodeGenerated($kelas));
 
     return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil Ditambahkan!']);
@@ -89,34 +89,34 @@ public function store(Request $request)
      */
  public function update(Request $request, string $id)
 {
-    //validate form
+   
     $this->validate($request, [
         'kelas' => 'required',
     ]);
 
-    //get post by ID
+  
     $kelas = Kelas::findOrFail($id);
 
-    // Generate QR code with dynamic class ID in the route
+    
     $qrCode = QRCode::format('png')->generate(url("/presensi/{$kelas->id}"));
 
     $outputFile = '/qrCodekelas/qr-' . $kelas->id . '.png';
 
     Storage::disk('public')->put($outputFile, $qrCode);
 
-    // Delete the old QR code file
+   
     Storage::disk('public')->delete($kelas->qrCode);
 
-    // Update the nilai kelas based on the form data
-    $kelas = Kelas::update([
+  
+    $kelas->update([
         'kelas' => $request->kelas,
         'qrCode' => $outputFile,
     ]);
 
-    // Trigger the QRCodeGenerated event
+
     event(new QRCodeGenerated($kelas));
 
-    // Redirect to index
+
     return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil Diubah!']);
 }
     /**
@@ -124,7 +124,7 @@ public function store(Request $request)
      */
     public function destroy(Kelas $kelas,$id)
     {
-         //get post by ID
+         
          $kelas = Kelas::findOrFail($id);
          $kelas->delete();
 

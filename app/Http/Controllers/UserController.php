@@ -49,7 +49,7 @@ class UserController extends Controller
     
 
     $imguser = $request->file('imguser');
-    $imguser = $imguser->storeAs('/img/profile', $imguser->hashName());
+    $imguser = $imguser->storeAs('images', $imguser->hashName());
 
     User::create([
         'name' => $request->name,
@@ -69,7 +69,7 @@ class UserController extends Controller
         return view('Layouts.User.edit', compact('user'));
     }
 
-   public function update(Request $request, $id)
+  public function update(Request $request, $id)
 {
     $request->validate([
         'name' => 'required',
@@ -80,30 +80,29 @@ class UserController extends Controller
 
     $user = User::findOrFail($id);
 
-    // Check if image is uploaded
     if ($request->hasFile('imguser')) {
 
-        // Upload new image
         $imguser = $request->file('imguser');
-        $imguserPath = $imguser->storeAs('public/img/profile', $imguser->hashName());
 
-        // Delete old image
+      
+        $imguserPath = $imguser->store('images', 'public');
+
+       
         if ($user->imguser) {
-            Storage::delete('public/img/profile/' . $user->imguser);
+            Storage::disk('public')->delete($user->imguser);       
         }
 
-        // Update user with new image
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role' => $request->role,
-            'imguser' => basename($imguserPath),
+            'imguser' => $imguserPath,
         ]);
 
     } else {
 
-        // Update user without changing the image
+   
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -116,14 +115,12 @@ class UserController extends Controller
 }
 
 
+
     public function destroy($id)
     {
         $user = User::findOrFail($id);
 
-       
-        if ($user->imguser) {
-            Storage::delete('public/img/profile/' . $user->imguser);
-        }
+          Storage::disk('public')->delete($user->imguser);
 
         $user->delete();
 

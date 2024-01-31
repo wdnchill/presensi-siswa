@@ -22,7 +22,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $kelas->kelas }}</td>
                 <td>
-                    <img src="{{ asset('/storage/' . $kelas->qrCode) }}" alt="Qrcode" width="75" height="75">
+                    <img src="{{ asset('storage/' . $kelas->qrCode) }}" alt="Qrcode" width="75" height="75">
                 </td>
                 <td>
                     <a href="{{ route('kelas.edit', $kelas->id) }}" class="btn btn-primary"><i

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
-//return type redirectResponse
 use Illuminate\Http\RedirectResponse;
 
 class SiswaController extends Controller
@@ -56,7 +55,7 @@ class SiswaController extends Controller
             'kelas_id' => $request->kelas_id,
         ]);
            
-           return redirect()->route('siswa.create')->with(['success' => 'Data Berhasil Ditambahkan!']);
+           return redirect()->route('siswa.index')->with(['success' => 'Data Berhasil Ditambahkan!']);
     }
 
     public function show(string $id)

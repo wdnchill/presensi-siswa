@@ -28,7 +28,7 @@ class DummyUsersSeeder extends Seeder
                 'username' => 'guru',
                 'password' => Hash::make('123456'),
                 'role' => 'guru',
-                'imguser' => 'Marsha.jpeg',
+                'imguser' => '',
             ],
             [
                 'name' => 'walas',

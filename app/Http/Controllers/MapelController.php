@@ -38,7 +38,7 @@ class MapelController extends Controller
             'namaMapel' => $request->namaMapel,            
         ]);        
 
-        return redirect()->route('mapel.create')->with(['success' => 'Data Berhasil Ditambahkan!']);
+        return redirect()->route('mapel.index')->with(['success' => 'Data Berhasil Ditambahkan!']);
     }
 
     /**
@@ -54,10 +54,8 @@ class MapelController extends Controller
      */
     public function edit(string $id)
     {
-         //get post by ID
                $mapel = Mapel::findOrFail($id);
 
-               //render view with post
                return view('Layouts.Mapel.edit', compact('mapel'));
     }
 
@@ -66,18 +64,18 @@ class MapelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //validate form
+     
     $this->validate($request, [
         'namaMapel' => 'required',
     ]);
 
-    //get post by ID
+   
     $mapel = Mapel::findOrFail($id);
     $mapel->update([
         'namaMapel' => $request->namaMapel,
     ]);
 
-    //redirect to index
+ 
     return redirect()->route('mapel.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
@@ -86,13 +84,13 @@ class MapelController extends Controller
      */
     public function destroy(string $id)
     {
-         //get post by ID
+       
          $mapel = Mapel::findOrFail($id);
 
-         //delete post
+         
          $mapel->delete();
 
-         //redirect to index
+       
          return redirect()->route('mapel.index')->with(['success' => 'Data Berhasil Dihapus!']);
         
     }

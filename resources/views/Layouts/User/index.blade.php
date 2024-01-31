@@ -24,8 +24,8 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>
-                    <img src="{{ asset('storage/' . $user->imguser) }}" alt="userimg"width="35"
-                        height="35" class="rounded-circle">
+                    <img src="{{ asset('storage/' . $user->imguser) }}" alt="userimg"width="50px"
+                        height="50px" class="rounded-circle">
                 </td>
                 <td>{{ $user->name }}</td> 
                 <td>{{ $user->email }}</td>
