@@ -62,7 +62,7 @@ class PresensiController extends Controller
             ]);
         }
 
-        return redirect()->route('presensi.index')->with(['success' => 'Data Berhasil Ditambahkan!']);
+        return redirect()->route('laporan')->with(['success' => 'Data Berhasil Ditambahkan!']);
     }
 
 

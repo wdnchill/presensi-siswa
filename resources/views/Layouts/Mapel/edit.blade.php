@@ -20,7 +20,7 @@
             <div class="col-sm-2"></div>
             <div class="col-sm-10">
                 <a href="{{ route('mapel.index') }}" type="button" class="btn btn-danger"><i class="ti ti-arrow-narrow-left fs-7"></i> Back</a>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary show-alert-submit-box">Update</button>
                 <button type="reset" class="btn btn-warning">Reset</button>
             </div>
         </div>

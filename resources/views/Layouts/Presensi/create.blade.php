@@ -87,7 +87,7 @@
             <div class="col-md-12 text-center">
                 <button type="submit" class="btn btn-outline-info show-alert-submit-box" id="submitBtn"
                     style="width: 100%;">
-                    <i class="bi bi-check"></i> Submit
+                    Submit
                 </button>
             </div>
         </div>

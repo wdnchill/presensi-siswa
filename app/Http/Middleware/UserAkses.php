@@ -18,6 +18,6 @@ class UserAkses
         if (auth()->user()->role == $role) {
             return $next($request);
         }
-        return redirect('beranda')->with(['success' => 'HANYA ADMIN YANG DAPAT MENGAKSES HALAMAN INI']);
+        return redirect('beranda')->with(['success' => 'MAAF HALAMAN TIDAK BISA DI AKSES, HANYA ADMIN YANG DAPAT MENGAKSES HALAMAN']);
     }
 }

@@ -66,6 +66,6 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary show-alert-submit-box">Update</button>
     </form>
 @endsection
