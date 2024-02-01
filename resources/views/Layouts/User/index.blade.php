@@ -20,14 +20,14 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($users as $user)
+        @foreach ($users as $user)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>
-                    <img src="{{ asset('storage/' . $user->imguser) }}" alt="userimg"width="50px"
-                        height="50px" class="rounded-circle">
+                    <img src="{{ asset('storage/' . $user->imguser) }}" alt="userimg"width="50px" height="50px"
+                        class="rounded-circle">
                 </td>
-                <td>{{ $user->name }}</td> 
+                <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role }}</td>
                 <td>
@@ -41,15 +41,7 @@
                     </form>
                 </td>
             </tr>
-        @empty
-            <tr>
-                <td colspan="6">
-                    <div class="alert alert-warning">
-                        Data user belum dimasukan.
-                    </div>
-                </td>
-            </tr>
-        @endforelse
+        @endforeach
     </tbody>
 </table>
 @endsection

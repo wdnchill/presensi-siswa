@@ -12,21 +12,24 @@
         <div class="mb-3 row">
             <label for="nis" class="col-sm-2 col-form-label">Nis</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="nis" name="nis" placeholder="MASUKAN NOMOR NIS SISWA" required>
+                <input type="number" class="form-control" id="nis" name="nis" placeholder="MASUKAN NOMOR NIS SISWA"
+                    required>
             </div>
         </div>
 
         <div class="mb-3 row">
             <label for="nisn" class="col-sm-2 col-form-label">Nisn</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="nisn" name="nisn" placeholder="MASUKAN NOMOR NISN SISWA" required>
+                <input type="number" class="form-control" id="nisn" name="nisn"
+                    placeholder="MASUKAN NOMOR NISN SISWA" required>
             </div>
         </div>
 
         <div class="mb-3 row">
             <label for="nama" class="col-sm-2 col-form-label">Nama Lengkap siswa</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="nama" name="nama_lengkap" placeholder="MASUKAN NAMA SISWA" required>
+                <input type="text" class="form-control" id="nama" name="nama_lengkap"
+                    placeholder="MASUKAN NAMA SISWA" required>
             </div>
         </div>
 
@@ -58,7 +61,8 @@
         <div class="mb-3 row">
             <div class="col-sm-2"></div>
             <div class="col-sm-10">
-                <a href="{{ route('siswa.index') }}" type="button" class="btn btn-danger"><i class="ti ti-arrow-narrow-left fs-7"></i> Back</a>
+                <a href="{{ route('siswa.index') }}" type="button" class="btn btn-danger"><i
+                        class="ti ti-arrow-narrow-left fs-7"></i> Back</a>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn btn-warning">Reset</button>
             </div>

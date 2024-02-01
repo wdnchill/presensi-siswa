@@ -16,14 +16,14 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($mapel as $mapels)
+        @foreach ($mapel as $mapels)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $mapels->namaMapel }}</td>
                 <td>
              <a href="{{ route('mapel.edit', $mapels->id) }}" class="btn btn-primary"><i
                             class="ti ti-edit"></i>EDIT</a>
-                    <form action="{{ route('mapel.destroy', $mapels->id) }}" method="POST" style="display: inline;">
+                    <form action="{{ route('mapel.destroy', $mapels->id) }}" method="POST" style="display: inline; ">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger show-alert-delete-box"><i
@@ -31,15 +31,7 @@
                     </form>
                 </td>
             </tr>
-        @empty
-            <tr>
-                <td colspan="4">
-                    <div class="alert alert-warning">
-                        Data mapel belum dimasukan.
-                    </div>
-                </td>
-            </tr>
-        @endforelse
+             @endforeach
     </tbody>
 </table>
 @endsection

@@ -14,9 +14,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class KelasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $kelases = Kelas::all();
@@ -24,17 +22,13 @@ class KelasController extends Controller
         return view('Layouts.Kelas.index', compact('kelases'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+  
     public function create()
     {
         return view('Layouts.Kelas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
 public function store(Request $request)
 {
     $this->validate($request, [
@@ -67,26 +61,20 @@ public function store(Request $request)
 
     return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil Ditambahkan!']);
 }
-    /**
-     * Display the specified resource.
-     */
+   
     public function show(string $id)
     {
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit($id)
     {
         $kelas = Kelas::findOrFail($id);
         return view('Layouts.Kelas.edit', compact('kelas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
  public function update(Request $request, string $id)
 {
    
@@ -118,10 +106,8 @@ public function store(Request $request)
 
 
     return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil Diubah!']);
-}
-    /**
-     * Remove the specified resource from storage.
-     */
+    }
+  
     public function destroy(Kelas $kelas,$id)
     {
          

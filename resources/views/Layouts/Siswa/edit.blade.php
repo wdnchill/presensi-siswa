@@ -13,16 +13,16 @@
         <div class="mb-3 row">
             <label for="nis" class="col-sm-2 col-form-label">Nis</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="nis" name="nis" placeholder="MASUKAN NOMOR NIS SISWA" required
-                    value="{{ old('nis', $siswas->nis) }}">
+                <input type="number" class="form-control" id="nis" name="nis" placeholder="MASUKAN NOMOR NIS SISWA"
+                    required value="{{ old('nis', $siswas->nis) }}">
             </div>
         </div>
 
-          <div class="mb-3 row">
+        <div class="mb-3 row">
             <label for="nisn" class="col-sm-2 col-form-label">Nis</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="nisn" name="nisn" placeholder="MASUKAN NOMOR NISN SISWA" required
-                    value="{{ old('nisn', $siswas->nisn) }}">
+                <input type="number" class="form-control" id="nisn" name="nisn"
+                    placeholder="MASUKAN NOMOR NISN SISWA" required value="{{ old('nisn', $siswas->nisn) }}">
             </div>
         </div>
 
@@ -38,13 +38,13 @@
             <label class="col-sm-2 col-form-label">Jenis Kelamin :</label>
             <div class="col-sm-10">
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" name="jenis_kelamin" id="L" value="Laki-Laki" required
-                        {{ $siswas->jenis_kelamin === 'Laki-Laki' ? 'checked' : '' }}>
+                    <input type="radio" class="form-check-input" name="jenis_kelamin" id="L" value="Laki-Laki"
+                        required {{ $siswas->jenis_kelamin === 'Laki-Laki' ? 'checked' : '' }}>
                     <label class="form-check-label" for="L">Laki-Laki</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" name="jenis_kelamin" id="P" value="Perempuan" required
-                        {{ $siswas->jenis_kelamin === 'Perempuan' ? 'checked' : '' }}>
+                    <input type="radio" class="form-check-input" name="jenis_kelamin" id="P" value="Perempuan"
+                        required {{ $siswas->jenis_kelamin === 'Perempuan' ? 'checked' : '' }}>
                     <label class="form-check-label" for="P">Perempuan</label>
                 </div>
             </div>
@@ -55,7 +55,7 @@
             <div class="col-sm-10">
                 <select class="form-select" id="kelas" name="kelas_id">
                     @foreach ($kelas as $kelas)
-                        <option value="{{ old('kelas_id',$kelas->id) }}">{{ old('kelas_id', $kelas->kelas) }}</option>
+                        <option value="{{ old('kelas_id', $kelas->id) }}">{{ old('kelas_id', $kelas->kelas) }}</option>
                     @endforeach
                 </select>
             </div>

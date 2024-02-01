@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($kelases as $kelas)
+        @foreach ($kelases as $kelas)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $kelas->kelas }}</td>
@@ -36,15 +36,7 @@
 
                 </td>
             </tr>
-        @empty
-            <tr>
-                <td colspan="4">
-                    <div class="alert alert-warning">
-                        Data kelas belum dimasukan.
-                    </div>
-                </td>
-            </tr>
-        @endforelse
+        @endforeach
     </tbody>
 </table>
 @endsection

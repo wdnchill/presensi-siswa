@@ -86,47 +86,49 @@
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.js"></script>
     <script src="https://cdn.datatables.net/scroller/2.3.0/js/dataTables.scroller.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#tabledata').DataTable({
-                responsive: true,
-                lengthChange: false,
-                searching: true,
-                paging: false,
-                info: false,
-                ordering: false,
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy',
-                    {
-                        extend: 'excelHtml5',
-                        exportOptions: {
-                            columns: [1, 2, 3, 4, 5, 6, 7, 8],
-                            modifier: {
-                                selected: true
-                            }
-                        },
-                        customize: function(xlsx) {
-                            var sheet = xlsx.xl.worksheets['Laporan absen siswa.xml'];
-                            // Your customization code here if necessary
+   <script>
+    $(document).ready(function () {
+        $('#tabledata').DataTable({
+            responsive: true,
+            lengthChange: false,
+            searching: true,
+            paging: false,
+            info: false,
+            ordering: false,
+            dom: 'Bfrtip',
+            language: {
+                emptyTable: "Data belum di masukan, silahkan input data terlebih dahulu."
+            },
+            buttons: [
+                'copy',
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8],
+                        modifier: {
+                            selected: true
                         }
                     },
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7],
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7],
-                        }
+                    customize: function (xlsx) {
+                        var sheet = xlsx.xl.worksheets['Laporan absen siswa.xml'];
                     }
-                ]
-            });
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                    }
+                }
+            ]
         });
-    </script>
+    });
+</script>
     <script type="text/javascript">
         $(document).ready(function() {
             $(document).on('click', '.show-alert-delete-box', function(event) {

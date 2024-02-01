@@ -8,7 +8,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-10 mb-3">
-            <a href="{{ route('presensi.index') }}" type="button" class="btn btn-danger">
+            <a href="{{ route('laporan') }}" type="button" class="btn btn-danger">
                 <i class="ti ti-arrow-narrow-left fs-7"></i> Back
             </a>
         </div>

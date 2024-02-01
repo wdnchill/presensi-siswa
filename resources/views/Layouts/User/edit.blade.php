@@ -11,8 +11,8 @@
         <div class="mb-3 row">
             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="nama" name="name" placeholder="MASUKAN NAMA LENGKAP" required
-                    value="{{ old('name', $user->name) }}">
+                <input type="text" class="form-control" id="nama" name="name" placeholder="MASUKAN NAMA LENGKAP"
+                    required value="{{ old('name', $user->name) }}">
             </div>
         </div>
 

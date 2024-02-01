@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Siswa;
 use App\Models\User;
 use App\Models\Kelas;
-use App\Models\Presensi; // Sesuaikan dengan model absensi yang Anda miliki
+use App\Models\Presensi;
 use Carbon\Carbon;
 
 class AdminController extends Controller

@@ -1,6 +1,6 @@
 @extends('Layouts.main')
 @section('title')
-   DATA SISWA | PRESENSI CITRA NEGARA
+    DATA SISWA | PRESENSI CITRA NEGARA
 @endsection
 @section('content')
 @section('sub-title')
@@ -30,6 +30,7 @@
         <tr>
             <th>No</th>
             <th>Nis</th>
+            <th>Nisn</th>
             <th>Nama</th>
             <th>Jenis Kelamin</th>
             <th>Kelas</th>
@@ -37,38 +38,29 @@
         </tr>
     </thead>
     <tbody>
-        @if ($siswas->count() > 0)
-            @foreach ($siswas as $siswa)
-                <tr data-kelas="{{ $siswa->kelas_id }}">
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $siswa->nis }}</td>
-                    <td>{{ $siswa->nama_lengkap }}</td>
-                    <td>{{ $siswa->jenis_kelamin }}</td>
-                    <td>{{ $siswa->kelas->kelas }}</td>
-                    <td>
-                        <div class="list-group list-group-horizontal" role="group" aria-label="Aksi">
-                            <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-primary"><i
-                                    class="ti ti-edit"></i>EDIT</a>
-                            <form action="{{ route('siswa.destroy', $siswa->id) }}" method="POST"
-                                style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger show-alert-delete-box"><i
-                                        class="ti ti-trash"></i>HAPUS</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-        @else
-            <tr>
-                <td colspan="6">
-                    <div class="alert alert-warning">
-                        Data siswa belum dimasukan.
+        @foreach ($siswas as $siswa)
+            <tr data-kelas="{{ $siswa->kelas_id }}">
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $siswa->nis }}</td>
+                <td>{{ $siswa->nisn }}</td>
+                <td>{{ $siswa->nama_lengkap }}</td>
+                <td>{{ $siswa->jenis_kelamin }}</td>
+                <td>{{ $siswa->kelas->kelas }}</td>
+                <td>
+                    <div class="list-group list-group-horizontal" role="group" aria-label="Aksi">
+                        <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-primary"><i
+                                class="ti ti-edit"></i>EDIT</a>
+                        <form action="{{ route('siswa.destroy', $siswa->id) }}" method="POST"
+                            style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger show-alert-delete-box"><i
+                                    class="ti ti-trash"></i>HAPUS</button>
+                        </form>
                     </div>
                 </td>
             </tr>
-        @endif
+        @endforeach
     </tbody>
 </table>
 @endsection

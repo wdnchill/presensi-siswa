@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+<div class="card-body">
     <form action="{{ route('presensi.filter') }}" method="post">
         @csrf
         <div class="row mb-3">
@@ -36,8 +37,7 @@
             </div>
         </div>
     </form>
-
-    <div class="card-body">
+</div>
         <table class="table table-striped" id="tabledata" style="width:100%" cellspacing="0">
             <thead>
                 <tr>
@@ -54,43 +54,32 @@
                 </tr>
             </thead>
             <tbody>
-                @if ($presensis->count() > 0)
-                    @foreach ($presensis as $presensi)
-                        <tr data-kelas="{{ $presensi->siswas->kelas_id }}">
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $presensi->siswas->nama_lengkap }}</td>
-                            <td>{{ $presensi->siswas->nisn }}</td>
-                            <td>{{ $presensi->siswas->nis }}</td>
-                            <td>{{ $presensi->kelas->kelas }}</td>
-                            <td>{{ $presensi->presensi }}</td>
-                            <td>{{ $presensi->users->name }}</td>
-                            <td>{{ $presensi->mapels->namaMapel }}</td>
-                            <td>{{ $presensi->created_at ? $presensi->created_at->format('d F Y') : 'N/A' }}</td>
-                            <td>
-                                <div class="list-group list-group-horizontal" role="group" aria-label="Aksi">
-                                    <a href="{{ route('presensi.edit', $presensi->id) }}" class="btn btn-primary m-1"><i
-                                            class="ti ti-edit"></i>EDIT</a>
-                                    <form action="{{ route('presensi.destroy', $presensi->id) }}" method="POST"
-                                        style="display: inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger m-1 show-alert-delete-box"><i
-                                                class="ti ti-trash"></i>HAPUS</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                @else
-                    <tr>
-                        <td colspan="9">
-                            <div class="alert alert-warning">
-                                Data Presensi belum di input
+                @foreach ($presensis as $presensi)
+                    <tr data-kelas="{{ $presensi->siswas->kelas_id }}">
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $presensi->siswas->nama_lengkap }}</td>
+                        <td>{{ $presensi->siswas->nisn }}</td>
+                        <td>{{ $presensi->siswas->nis }}</td>
+                        <td>{{ $presensi->kelas->kelas }}</td>
+                        <td>{{ $presensi->presensi }}</td>
+                        <td>{{ $presensi->users->name }}</td>
+                        <td>{{ $presensi->mapels->namaMapel }}</td>
+                        <td>{{ $presensi->created_at ? $presensi->created_at->format('d F Y') : 'N/A' }}</td>
+                        <td>
+                            <div class="list-group list-group-horizontal" role="group" aria-label="Aksi">
+                                <a href="{{ route('presensi.edit', $presensi->id) }}" class="btn btn-primary m-1"><i
+                                        class="ti ti-edit"></i>EDIT</a>
+                                <form action="{{ route('presensi.destroy', $presensi->id) }}" method="POST"
+                                    style="display: inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger m-1 show-alert-delete-box"><i
+                                            class="ti ti-trash"></i>HAPUS</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
-                @endif
+                @endforeach
             </tbody>
         </table>
-    </div>
 @endsection

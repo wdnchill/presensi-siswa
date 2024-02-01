@@ -19,11 +19,11 @@
                     <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         @if (empty(auth()->user()->imguser))
-                            <img src="{{ asset('assets/images/icon.jpg') }}" alt="userimg" width="35"
-                                height="35" class="rounded-circle">
+                            <img src="{{ asset('assets/images/icon.jpg') }}" alt="userimg" width="50"
+                                height="50" class="rounded-circle">
                         @else
                             <img src="{{ asset('storage/'.auth()->user()->imguser) }}" alt="userimg"
-                                width="35" height="35" class="rounded-circle">
+                                width="50" height="50" class="rounded-circle">
                         @endif
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
