@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('Layouts.main')
 @section('title')
     EDIT DATA SISWA | PRESENSI CITRA NEGARA
 @endsection
