@@ -2,8 +2,15 @@
 @section('title')
     EDIT DATA USER | PRESENSI CITRA NEGARA
 @endsection
+@section('sub-title')
+Form Edit User
+@endsection
 @section('content')
-    <h5 class="card-title fw-semibold mb-4">Form Edit User</h5>
+    <div class="mb-4 d-flex justify-content-center">
+          <div class="mb-4 d-flex justify-content-center">
+        <img src="{{ asset('storage/' . $user->imguser) }}" alt="User Image" class="rounded-circle" style="width: 200px; height: 200px;" id="preview-image">
+    </div>
+    </div>
     <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -13,6 +20,13 @@
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="nama" name="name" placeholder="MASUKAN NAMA LENGKAP"
                     required value="{{ old('name', $user->name) }}">
+            </div>
+        </div>
+         <div class="mb-3 row">
+            <label for="username" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="username" name="username" placeholder="MASUKAN USERNAME"
+                    required value="{{ old('username', $user->username) }}">
             </div>
         </div>
 
@@ -47,7 +61,7 @@
             <label for="foto" class="col-sm-2 col-form-label">Foto</label>
             <div class="col-sm-10">
                 <input type="file" class="form-control" id="foto" accept="image/*" name="imguser"
-                    value="{{ old('imguser', $user->imguser) }}">
+                    value="{{ old('imguser', $user->imguser) }}" onchange="previewImage(event)">
                 <div id="croppie-container" class="mt-3"></div>
             </div>
         </div>

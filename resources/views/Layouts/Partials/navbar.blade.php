@@ -40,7 +40,7 @@
                                 <i class="ti ti-tower fs-6"></i>
                                 <p class="mb-0 fs-3">{{ Auth::user()->role }}</p>
                             </a>
-                            <a href="{{ route('logout') }}" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                            <a href="#" class="btn btn-outline-primary mx-3 mt-2 d-block" onclick="modal_logout()">Logout</a>
                         </div>
                     </div>
                 </li>

@@ -41,15 +41,16 @@ class SesiController extends Controller
     private function redirectBasedOnRole()
     {
         if (Auth::user()->role == 'admin' || Auth::user()->role == 'walas' || Auth::user()->role == 'guru') {
-            // Flash a welcome message
+          
             session()->flash('success', 'Selamat datang, ' . Auth::user()->name . '!');
             return redirect('');
         }
     }
 
-    public function logout()
-    {
-        auth()->logout(); // Log the user out
-        return redirect(''); // Redirect to the login page
-    }
+   public function logout()
+{
+    auth()->logout(); 
+    return redirect('');
+}
+
 }

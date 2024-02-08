@@ -66,7 +66,7 @@
                         <td>{{ $presensi->mapels->namaMapel }}</td>
                         <td>{{ $presensi->created_at ? $presensi->created_at->format('d F Y') : 'N/A' }}</td>
                         <td>
-                            <div class="list-group list-group-horizontal" role="group" aria-label="Aksi">
+                            <div class="list-group list-group-horizontal" role="group">
                                 <a href="{{ route('presensi.edit', $presensi->id) }}" class="btn btn-primary m-1"><i
                                         class="ti ti-edit"></i>EDIT</a>
                                 <form action="{{ route('presensi.destroy', $presensi->id) }}" method="POST"

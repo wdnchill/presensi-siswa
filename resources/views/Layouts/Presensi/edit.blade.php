@@ -4,8 +4,6 @@
     EDIT DATA PRESENSI SISWA | PRESENSI CITRA NEGARA
 @endsection
 
-@section('content')
-
 @section('sub-title')
     FORM EDIT ABSEN
 @endsection

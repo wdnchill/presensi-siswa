@@ -3,7 +3,7 @@
     CREATE DATA MAPEL | PRESENSI CITRA NEGARA
 @endsection
 @section('sub-title')
-    Form mapel
+    Form edit mapel
 @endsection
 @section('content')
     <form action="{{ route('mapel.update', $mapel->id) }}" method="post">

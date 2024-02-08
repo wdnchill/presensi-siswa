@@ -108,17 +108,23 @@ public function store(Request $request)
     return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
   
-    public function destroy(Kelas $kelas,$id)
-    {
-         
-         $kelas = Kelas::findOrFail($id);
-         $kelas->delete();
+   public function destroy(Kelas $kelas, $id)
+{
+    $kelas = Kelas::findOrFail($id);
+    $presensiCount = $kelas->presensi()->count();
+    
+    if ($presensiCount > 0) {
+        return redirect()->back()->with(['error' => 'Tidak dapat menghapus data kelas karena ada data terkait dalam tabel presensi. Silahkan hapus data presensi yang berkaitan terlebih dahulu.']);
+    }
+    
+    if ($kelas->qrCode) {
+        Storage::disk('public')->delete($kelas->qrCode);
+    }
 
-         Storage::disk('public')->delete($kelas->qrCode);
-         return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil Dihapus!']);
+    $kelas->delete();
 
-
-     }
+    return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil Dihapus!']);
+}
 
     }
 

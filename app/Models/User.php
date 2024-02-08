@@ -46,7 +46,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-     public function presnsi()
+     public function presensi()
     {
         return $this->hasMany(Presensi::class, 'user_id'); 
     }

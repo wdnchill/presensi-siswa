@@ -6,6 +6,10 @@
     Form Register User
 @endsection
 @section('content')
+<div class="mb-4 d-flex justify-content-center">
+                <img src="{{ asset('assets/images/icon.jpg') }}" alt="userimg"
+                 class="rounded-circle" style="width: 200px; height: 200px;" id="preview-image">
+    </div>
     <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
         @csrf
 
@@ -16,7 +20,13 @@
                     required>
             </div>
         </div>
-
+        <div class="mb-3 row">
+            <label for="username" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="username" name="username" placeholder="MASUKAN USERNAME"
+                    required>
+            </div>
+        </div>
         <div class="mb-3 row">
             <label for="email" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
@@ -48,7 +58,7 @@
         <div class="mb-3 row">
             <label for="foto" class="col-sm-2 col-form-label">Foto</label>
             <div class="col-sm-10">
-                <input type="file" class="form-control" id="imguser" name="imguser" accept="image/*" required>
+                <input type="file" class="form-control" id="imguser" name="imguser" accept="image/*" onchange="previewImage(event)" required>
                 <div id="croppie-container" class="mt-3"></div>
             </div>
         </div>

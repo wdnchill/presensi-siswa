@@ -14,6 +14,7 @@
             <th>No</th>
             <th>Foto</th>
             <th>Nama</th>
+            <th>Username</th>
             <th>Email</th>
             <th>Role</th>
             <th>action</th>
@@ -24,21 +25,25 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>
-                    <img src="{{ asset('storage/' . $user->imguser) }}" alt="userimg"width="50px" height="50px"
+                    <img src="{{ asset('storage/' . $user->imguser) }}" alt="not found" width="50px" height="50px"
                         class="rounded-circle">
                 </td>
                 <td>{{ $user->name }}</td>
+                <td>{{ $user->username }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role }}</td>
                 <td>
-                    <form action="{{ route('user.destroy', $user->id) }}" method="POST">
-                        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary "><i
-                                class="ti ti-edit"></i>EDIT</a>
+                    <div class="list-group list-group-horizontal" role="group">
+                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary m-1"><i
+                                class="ti ti-edit"></i>EDIT</a>                            
+
+                            <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger show-alert-delete-box"><i
+                        <button type="submit" class="btn btn-danger m-1 show-alert-delete-box"><i
                                 class="ti ti-trash"></i>HAPUS</button>
-                    </form>
+                        </form>
+                    </div>
                 </td>
             </tr>
         @endforeach

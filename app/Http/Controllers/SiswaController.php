@@ -92,17 +92,21 @@ class SiswaController extends Controller
         return redirect()->route('siswa.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
-
-    public function destroy(string $id)
-    {
-
-        $siswas = Siswa::findOrFail($id);
-
-        $siswas->delete();
-
-        return redirect()->route('siswa.index')->with(['success' => 'Data Berhasil Dihapus!']);
+public function destroy(string $id)
+{
+    $siswa = Siswa::findOrFail($id);
+    $presensiCount = $siswa->siswas()->count();
+    
+    if ($presensiCount > 0) {
+        return redirect()->back()->with(['error' => 'Tidak dapat menghapus data siswa karena ada data terkait dalam tabel presensi. Silahkan hapus data presensi yang berkaitan terlebih dahulu.']);
     }
 
+    $siswa->delete();
+
+    return redirect()->route('siswa.index')->with(['success' => 'Data Berhasil Dihapus!']);
+}
+
+  
 public function filterSiswa(Request $request)
 {
     $request->validate([

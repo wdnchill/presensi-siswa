@@ -17,6 +17,12 @@
             <div class="container-fluid">
                 <div class="content">
                     <div id="notificationArea" class="notification-area">
+                        @if(session('error'))
+                         <div class="alert alert-danger">
+                       {{ session('error') }}
+                            </div>
+                            @endif
+
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -116,13 +122,13 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7,8],
                     }
                 },
                 {
                     extend: 'pdf',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7,8],
                     }
                 }
             ]
@@ -174,6 +180,37 @@
             });
         });
     </script>
+    <script>
+    function modal_logout() {
+        Swal.fire({
+            title: 'Peringatan',
+            text: 'Apakah kamu yakin ingin logout?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Iya',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                
+                window.location.href = "{{ route('logout') }}";
+            } else {
+               
+                return false;
+            }
+        });
+    }
+</script>
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('preview-image');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
 </body>
 
 </html>

@@ -47,14 +47,14 @@
                 <td>{{ $siswa->jenis_kelamin }}</td>
                 <td>{{ $siswa->kelas->kelas }}</td>
                 <td>
-                    <div class="list-group list-group-horizontal" role="group" aria-label="Aksi">
-                        <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-primary"><i
+                    <div class="list-group list-group-horizontal" role="group">
+                        <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-primary m-1"><i
                                 class="ti ti-edit"></i>EDIT</a>
                         <form action="{{ route('siswa.destroy', $siswa->id) }}" method="POST"
                             style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger show-alert-delete-box"><i
+                            <button type="submit" class="btn btn-danger m-1 show-alert-delete-box"><i
                                     class="ti ti-trash"></i>HAPUS</button>
                         </form>
                     </div>

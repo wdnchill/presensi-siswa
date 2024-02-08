@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Presensi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -33,8 +34,10 @@ class UserController extends Controller
             'email' => 'required|unique:users,email|email|max:50',
             'password' => 'required',
             'role' => 'required',
+            'username' => 'required',
             'imguser' => 'image|mimes:jpeg,jpg,png|max:2048',
         ], [
+            'username.required' => 'Kolom username wajib diisi.',
             'role.required' => 'Kolom role wajib diisi.',
             'name.required' => 'Kolom nama wajib diisi.',
             'email.required' => 'Kolom email wajib diisi.',
@@ -56,6 +59,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role' => $request->role,
+            'username' => $request->username,
             'imguser' => $imguser,
         ]);
 
@@ -75,6 +79,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users,email,' . $id . '|email|max:50',
             'password' => 'required',
+            'username' => 'required',
             'imguser' => 'image|mimes:jpeg,jpg,png|max:2048',
         ]);
 
@@ -97,6 +102,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'role' => $request->role,
+                'username' => $request->username,
                 'imguser' => $imguserPath,
             ]);
         } else {
@@ -107,6 +113,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'role' => $request->role,
+                'username' => $request->username,
             ]);
         }
 
@@ -115,14 +122,25 @@ class UserController extends Controller
 
 
 
-    public function destroy($id)
-    {
-        $user = User::findOrFail($id);
+public function destroy($id)
+{
+    $user = User::findOrFail($id);
 
-        Storage::disk('public')->delete($user->imguser);
 
-        $user->delete();
+    $presensiCount = $user->presensi()->count();
 
-        return redirect()->route('user.index')->with(['success' => 'Data Berhasil Dihapus!']);
+    if ($presensiCount > 0) {
+        return redirect()->back()->with(['error' => 'Tidak dapat menghapus pengguna karena ada data terkait dalam tabel presensi silahkan apus data presensi yang berkaitan terlebih dahulu, oleh user.']);
     }
+
+    if ($user->imguser) {
+        Storage::disk('public')->delete($user->imguser);
+    }
+
+    $user->delete();
+
+    return redirect()->route('user.index')->with(['success' => 'Data Berhasil Dihapus!']);
+}
+
+
 }

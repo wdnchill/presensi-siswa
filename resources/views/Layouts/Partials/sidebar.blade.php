@@ -79,8 +79,8 @@
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">AUTH</span>
                     </li>
-                    <li class="sidebar-item{{ Request::is('logout*') ? ' active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('logout') }}" aria-expanded="true"
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="#" aria-expanded="true"
                             onclick="modal_logout()">
                             <span>
                                 <i class="ti ti-logout"></i>
@@ -125,8 +125,8 @@
             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
             <span class="hide-menu">AUTH</span>
         </li>
-        <li class="sidebar-item{{ Request::is('logout*') ? ' active' : '' }}">
-            <a class="sidebar-link" href="{{ route('logout') }}" aria-expanded="true" onclick="modal_logout()">
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="#" aria-expanded="true" onclick="modal_logout()">
                 <span>
                     <i class="ti ti-logout"></i>
                 </span>
@@ -135,19 +135,4 @@
         </li>
     @endif
 </aside>
-<script>
-    function modal_logout() {
-        Swal.fire({
-            title: 'Peringtan',
-            text: 'Apakah kamu yakin ingin logout?',
-            icon: 'warning',
-            confirmButtonText: 'Iya',
-            cancelButtonText: 'Tidak',
-            showCancelButton: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location = "{{ route('logout') }}";
-            }
-        })
-    }
-</script>
+

@@ -25,15 +25,15 @@
                     <img src="{{ asset('storage/' . $kelas->qrCode) }}" alt="Qrcode" width="75" height="75">
                 </td>
                 <td>
-                    <a href="{{ route('kelas.edit', $kelas->id) }}" class="btn btn-primary"><i
-                            class="ti ti-edit"></i>EDIT</a>
-                    <form action="{{ route('kelas.destroy', $kelas->id) }}" method="POST" style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger show-alert-delete-box"><i
-                                class="ti ti-trash"></i>HAPUS</button>
-                    </form>
-
+                            <div class="list-group list-group-horizontal" role="group">
+                            <a href="{{ route('kelas.edit', $kelas->id) }}" class="btn btn-primary m-1"><i class="ti ti-edit"></i> EDIT</a>
+                
+                            <form action="{{ route('kelas.destroy', $kelas->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger m-1 show-alert-delete-box"><i class="ti ti-trash"></i> HAPUS</button>
+                            </form>
+                    </div>
                 </td>
             </tr>
         @endforeach

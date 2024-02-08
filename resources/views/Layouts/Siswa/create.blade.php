@@ -12,7 +12,7 @@
         <div class="mb-3 row">
             <label for="nis" class="col-sm-2 col-form-label">Nis</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="nis" name="nis" placeholder="MASUKAN NOMOR NIS SISWA"
+            <input type="number" class="form-control" id="nis" name="nis" placeholder="MASUKAN NOMOR NIS SISWA"
                     required>
             </div>
         </div>

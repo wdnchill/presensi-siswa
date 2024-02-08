@@ -16,7 +16,7 @@ class Kelas extends Model
     {
         return $this->hasMany(Siswa::class, 'kelas_id');
     }
-    public function presnsi()
+    public function presensi()
     {
         return $this->hasMany(Presensi::class, 'siswa_id'); 
     }
