@@ -2,10 +2,10 @@
 @section('title')
     EDIT DATA KELAS | PRESENSI CITRA NEGARA
 @endsection
-@section('content')
 @section('sub-title')
     FORM EDIT DATA KELAS
 @endsection
+@section('content')
     <form action="{{ route('kelas.update', $kelas->id) }}" method="post">
         @csrf
         @method('PUT')

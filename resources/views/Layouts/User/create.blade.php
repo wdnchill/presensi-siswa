@@ -39,7 +39,7 @@
             <label for="pw" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
                 <input type="password" class="form-control" id="pw" name="password"
-                    placeholder="MASUKAN PASSWORD MINIMAL 8 CHARAKTER" required>
+                    placeholder="MASUKAN PASSWORD" required>
             </div>
         </div>
 

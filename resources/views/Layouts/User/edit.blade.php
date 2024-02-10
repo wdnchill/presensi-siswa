@@ -33,7 +33,7 @@ Form Edit User
         <div class="mb-3 row">
             <label for="email" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" id="email" name="email" placeholder="MASUKAN EMAIL AKTIF"
+                <input type="email" class="form-control" id="email" name="email" placeholder="MASUKAN EMAIL BARU"
                     required value="{{ old('email', $user->email) }}">
             </div>
         </div>
@@ -41,8 +41,7 @@ Form Edit User
         <div class="mb-3 row">
             <label for="pw" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="pw" name="password" placeholder="MASUKAN PASSWORD"
-                    required value="{{ old('password', $user->password) }}">
+                <input type="password" class="form-control" id="pw" name="password" placeholder="MASUKAN PASSWORD BARU" value="{{ old('password') }}">
             </div>
         </div>
 

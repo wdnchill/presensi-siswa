@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Presensi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash; 
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
@@ -50,22 +49,23 @@ class UserController extends Controller
             'imguser.max' => 'Gambar tidak boleh lebih dari 2048 kilobita.',
         ]);
 
+        
+        if ($request->hasFile('imguser')) {
+            $imguserPath = $request->file('imguser')->store('images');
+        }
 
-        $imguser = $request->file('imguser');
-        $imguser = $imguser->storeAs('images', $imguser->hashName());
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => Hash::make($request->password), 
             'role' => $request->role,
             'username' => $request->username,
-            'imguser' => $imguser,
+            'imguser' => $imguserPath ?? null,
         ]);
 
         return redirect()->route('user.index')->with(['success' => 'Data Berhasil Ditambahkan!']);
     }
-
 
     public function edit($id)
     {
@@ -78,7 +78,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email,' . $id . '|email|max:50',
-            'password' => 'required',
+            'password' => 'nullable',
             'username' => 'required',
             'imguser' => 'image|mimes:jpeg,jpg,png|max:2048',
         ]);
@@ -86,61 +86,41 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         if ($request->hasFile('imguser')) {
-
-            $imguser = $request->file('imguser');
-
-
-            $imguser = $imguser->storeAs('images', $imguser->hashName());
-
-
-            if ($user->imguser) {
-                Storage::disk('public')->delete($user->imguser);
-            }
-
-            $user->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
-                'role' => $request->role,
-                'username' => $request->username,
-                'imguser' => $imguser,
-            ]);
-        } else {
-
-
-            $user->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
-                'role' => $request->role,
-                'username' => $request->username,
-            ]);
+            $imguserPath = $request->file('imguser')->store('images');
+            
+               if ($user->imguser) {
+                Storage::delete($user->imguser);
+                }
         }
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'role' => $request->role,
+            'username' => $request->username,
+            'imguser' => $imguserPath ?? $user->imguser,
+        ]);
 
         return redirect()->route('user.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
 
+        
+        $presensiCount = $user->presensi()->count();
+        if ($presensiCount > 0) {
+            return redirect()->back()->with(['error' => 'Tidak dapat menghapus pengguna karena ada data terkait dalam tabel presensi.']);
+        }
 
-public function destroy($id)
-{
-    $user = User::findOrFail($id);
+        if ($user->imguser) {
+            Storage::delete($user->imguser);
+        }
 
+        $user->delete();
 
-    $presensiCount = $user->presensi()->count();
-
-    if ($presensiCount > 0) {
-        return redirect()->back()->with(['error' => 'Tidak dapat menghapus pengguna karena ada data terkait dalam tabel presensi silahkan apus data presensi yang berkaitan terlebih dahulu, oleh user.']);
+        return redirect()->route('user.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
-
-    if ($user->imguser) {
-        Storage::disk('public')->delete($user->imguser);
-    }
-
-    $user->delete();
-
-    return redirect()->route('user.index')->with(['success' => 'Data Berhasil Dihapus!']);
-}
-
-
 }
