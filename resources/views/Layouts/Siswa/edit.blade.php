@@ -19,7 +19,7 @@
         </div>
 
         <div class="mb-3 row">
-            <label for="nisn" class="col-sm-2 col-form-label">Nis</label>
+            <label for="nisn" class="col-sm-2 col-form-label">Nisn</label>
             <div class="col-sm-10">
                 <input type="number" class="form-control" id="nisn" name="nisn"
                     placeholder="MASUKAN NOMOR NISN SISWA" required value="{{ old('nisn', $siswas->nisn) }}">

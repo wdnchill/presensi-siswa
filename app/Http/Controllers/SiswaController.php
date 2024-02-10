@@ -28,18 +28,20 @@ class SiswaController extends Controller
 
     public function store(Request $request)
     {
-        //validate form
+    
         $this->validate($request, [
-            'nisn' => 'required|numeric',
-            'nis' => 'required|numeric',
+            'nisn' => 'required|numeric|digits:10',
+            'nis' => 'required|numeric|digits:9',
             'nama_lengkap' => 'required',
             'jenis_kelamin' => 'required',
             'kelas_id' => 'required',
         ], [
             'nis.required' => 'Kolom NIS wajib diisi.',
             'nis.numeric' => 'Kolom NIS harus berupa angka.',
+            'nis.digits' => 'Kolom NIS harus terdiri dari 9 digit angka.',
             'nisn.required' => 'Kolom NISN wajib diisi.',
             'nisn.numeric' => 'Kolom NISN harus berupa angka.',
+            'nisn.digits' => 'Kolom NISN harus terdiri dari 10 digit angka.',
             'nama_lengkap.required' => 'Kolom Nama Lengkap wajib diisi.',
             'jenis_kelamin.required' => 'Kolom Jenis Kelamin wajib diisi.',
             'kelas_id.required' => 'Kolom Kelas wajib diisi.',
@@ -73,16 +75,16 @@ class SiswaController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
-            'nis' => 'required|numeric',
-            'nisn' => 'required|numeric',
+            'nis' => 'required|numeric|digits:9',
+            'nisn' => 'required|numeric|digits:10',
             'nama_lengkap' => 'required',
             'jenis_kelamin' => 'required',
-            'kelas_id' => 'required'
+            'kelas_id' => 'required',
         ]);
 
         $siswas = Siswa::findOrFail($id);
         $siswas->update([
-            'nisn' => $request->nis,
+            'nisn' => $request->nisn,
             'nis' => $request->nis,
             'nama_lengkap' => $request->nama_lengkap,
             'jenis_kelamin' => $request->jenis_kelamin,

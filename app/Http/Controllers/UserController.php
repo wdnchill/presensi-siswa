@@ -90,7 +90,7 @@ class UserController extends Controller
             $imguser = $request->file('imguser');
 
 
-            $imguserPath = $imguser->store('images', 'public');
+            $imguser = $imguser->storeAs('images', $imguser->hashName());
 
 
             if ($user->imguser) {
@@ -103,7 +103,7 @@ class UserController extends Controller
                 'password' => bcrypt($request->password),
                 'role' => $request->role,
                 'username' => $request->username,
-                'imguser' => $imguserPath,
+                'imguser' => $imguser,
             ]);
         } else {
 
