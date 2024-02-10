@@ -3,7 +3,7 @@
     EDIT DATA SISWA | PRESENSI CITRA NEGARA
 @endsection
 @section('sub-title')
-    FORM REGISTER SISWA
+    FORM EDIT DATA SISWA
 @endsection
 @section('content')
     <form action="{{ route('siswa.update', $siswas->id) }}" method="post">
