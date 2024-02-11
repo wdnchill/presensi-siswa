@@ -3,13 +3,14 @@
     EDIT DATA USER | PRESENSI CITRA NEGARA
 @endsection
 @section('sub-title')
-Form Edit User
+    FORM EDIT DATA USER
 @endsection
 @section('content')
     <div class="mb-4 d-flex justify-content-center">
-          <div class="mb-4 d-flex justify-content-center">
-        <img src="{{ asset('storage/' . $user->imguser) }}" alt="User Image" class="rounded-circle" style="width: 200px; height: 200px;" id="preview-image">
-    </div>
+        <div class="mb-4 d-flex justify-content-center">
+            <img src="{{ asset('storage/' . $user->imguser) }}" alt="User Image" class="rounded-circle"
+                style="width: 200px; height: 200px;" id="preview-image">
+        </div>
     </div>
     <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -18,14 +19,14 @@ Form Edit User
         <div class="mb-3 row">
             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="nama" name="name" placeholder="MASUKAN NAMA LENGKAP"
+                <input type="text" class="form-control" id="nama" name="name" placeholder="PERBARUI NAMA LENGKAP"
                     required value="{{ old('name', $user->name) }}">
             </div>
         </div>
-         <div class="mb-3 row">
+        <div class="mb-3 row">
             <label for="username" class="col-sm-2 col-form-label">Username</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="username" name="username" placeholder="MASUKAN USERNAME"
+                <input type="text" class="form-control" id="username" name="username" placeholder="PERBARUI USERNAME"
                     required value="{{ old('username', $user->username) }}">
             </div>
         </div>
@@ -33,7 +34,7 @@ Form Edit User
         <div class="mb-3 row">
             <label for="email" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" id="email" name="email" placeholder="MASUKAN EMAIL BARU"
+                <input type="email" class="form-control" id="email" name="email" placeholder="PERBARUI EMAIL"
                     required value="{{ old('email', $user->email) }}">
             </div>
         </div>
@@ -41,7 +42,8 @@ Form Edit User
         <div class="mb-3 row">
             <label for="pw" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="pw" name="password" placeholder="MASUKAN PASSWORD BARU" value="{{ old('password') }}">
+                <input type="password" class="form-control" id="pw" name="password" placeholder="PERBARUI PASSWORD"
+                    value="{{ old('password') }}">
             </div>
         </div>
 

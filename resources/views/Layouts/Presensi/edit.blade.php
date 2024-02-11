@@ -5,11 +5,11 @@
 @endsection
 
 @section('sub-title')
-    FORM EDIT ABSEN
+    FORM EDIT PRESENSI
 @endsection
 
 @section('content')
-<div class="row">
+    <div class="row">
         <div class="col-sm-10 mb-3">
             <a href="{{ route('laporan') }}" type="button" class="btn btn-danger">
                 <i class="ti ti-arrow-narrow-left fs-7"></i> Back
@@ -47,19 +47,19 @@
             <label class="form-label">Keterangan :</label>
             <div class="btn-group d-flex" role="group" aria-label="Vertical radio toggle button group">
                 <input type="radio" class="btn-check" name="presensi" id="hadir" value="Hadir"
-                    {{ $presensi->presensi === 'Hadir' ? 'checked' : '' }} required>
+                    {{ $presensi->presensi == 'Hadir' ? 'checked' : '' }} required>
                 <label class="btn btn-outline-success" for="hadir">Hadir</label>
 
                 <input type="radio" class="btn-check" name="presensi" id="alfa" value="Alfa"
-                    {{ $presensi->presensi === 'Alpa' ? 'checked' : '' }} required>
+                    {{ $presensi->presensi == 'Alfa' ? 'checked' : '' }} required>
                 <label class="btn btn-outline-danger" for="alfa">Alfa</label>
 
                 <input type="radio" class="btn-check" name="presensi" id="sakit" value="Sakit"
-                    {{ $presensi->presensi === 'Sakit' ? 'checked' : '' }} required>
+                    {{ $presensi->presensi == 'Sakit' ? 'checked' : '' }} required>
                 <label class="btn btn-outline-warning" for="sakit">Sakit</label>
 
                 <input type="radio" class="btn-check" name="presensi" id="izin" value="Izin"
-                    {{ $presensi->presensi === 'Izin' ? 'checked' : '' }} required>
+                    {{ $presensi->presensi == 'Izin' ? 'checked' : '' }} required>
                 <label class="btn btn-outline-info" for="izin">Izin</label>
             </div>
         </div>

@@ -3,7 +3,7 @@
     EDIT DATA SISWA | PRESENSI CITRA NEGARA
 @endsection
 @section('sub-title')
-    FORM REGISTER SISWA
+    FORM EDIT DATA SISWA
 @endsection
 @section('content')
     <form action="{{ route('siswa.update', $siswas->id) }}" method="post">
@@ -13,7 +13,7 @@
         <div class="mb-3 row">
             <label for="nis" class="col-sm-2 col-form-label">Nis</label>
             <div class="col-sm-10">
-            <input type="number" class="form-control" id="nis" name="nis" placeholder="MASUKAN NOMOR NIS SISWA"
+                <input type="number" class="form-control" id="nis" name="nis" placeholder="PERBARUI NOMOR NIS SISWA"
                     required value="{{ old('nis', $siswas->nis) }}">
             </div>
         </div>
@@ -22,15 +22,15 @@
             <label for="nisn" class="col-sm-2 col-form-label">Nisn</label>
             <div class="col-sm-10">
                 <input type="number" class="form-control" id="nisn" name="nisn"
-                    placeholder="MASUKAN NOMOR NISN SISWA" required value="{{ old('nisn', $siswas->nisn) }}">
+                    placeholder="PERBARUI NOMOR NISN SISWA" required value="{{ old('nisn', $siswas->nisn) }}">
             </div>
         </div>
 
         <div class="mb-3 row">
             <label for="nama" class="col-sm-2 col-form-label">Nama</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="nama" name="nama_lengkap" placeholder="MASUKAN NAMA "
-                    required value="{{ old('nama_lengkap', $siswas->nama_lengkap) }}">
+                <input type="text" class="form-control" id="nama" name="nama_lengkap"
+                    placeholder="PERBARUI NAMA SISWA " required value="{{ old('nama_lengkap', $siswas->nama_lengkap) }}">
             </div>
         </div>
 
@@ -54,8 +54,11 @@
             <label for="kelas" class="col-sm-2 col-form-label">Kelas</label>
             <div class="col-sm-10">
                 <select class="form-select" id="kelas" name="kelas_id">
+                    <option selected disabled>Pilih Kelas</option>
                     @foreach ($kelas as $kelas)
-                        <option value="{{ old('kelas_id', $kelas->id) }}">{{ old('kelas_id', $kelas->kelas) }}</option>
+                        <option value="{{ old('kelas_id', $kelas->id) }}"
+                            {{ old('kelas_id', $siswas->kelas_id) == $kelas->id ? 'selected' : '' }}>
+                            {{ $kelas->kelas }}</option>
                     @endforeach
                 </select>
             </div>

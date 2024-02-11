@@ -3,16 +3,15 @@
     CREATE DATA SISWA | PRESENSI CITRA NEGARA
 @endsection
 @section('sub-title')
-    Form siswa
+    FORM CREATE DATA SISWA
 @endsection
 @section('content')
     <form action="{{ route('siswa.store') }}" method="post">
         @csrf
-
         <div class="mb-3 row">
             <label for="nis" class="col-sm-2 col-form-label">Nis</label>
             <div class="col-sm-10">
-            <input type="number" class="form-control" id="nis" name="nis" placeholder="MASUKAN NOMOR NIS SISWA"
+                <input type="number" class="form-control" id="nis" name="nis" placeholder="MASUKAN NOMOR NIS SISWA"
                     required>
             </div>
         </div>
@@ -51,6 +50,7 @@
             <label for="kelas" class="col-sm-2 col-form-label">Kelas</label>
             <div class="col-sm-10">
                 <select class="form-select" id="kelas" name="kelas_id">
+                    <option selected disabled>Pilih Kelas</option>
                     @foreach ($kelas as $kelas)
                         <option value="{{ $kelas->id }}">{{ $kelas->kelas }}</option>
                     @endforeach

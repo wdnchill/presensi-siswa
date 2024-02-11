@@ -34,14 +34,14 @@
                 <td>{{ $user->role }}</td>
                 <td>
                     <div class="list-group list-group-horizontal" role="group">
-                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary m-1"><i
-                                class="ti ti-edit"></i>EDIT</a>                            
+                        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary m-1"><i
+                                class="ti ti-edit"></i>EDIT</a>
 
-                            <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger m-1 show-alert-delete-box"><i
-                                class="ti ti-trash"></i>HAPUS</button>
+                        <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger m-1 show-alert-delete-box"><i
+                                    class="ti ti-trash"></i>HAPUS</button>
                         </form>
                     </div>
                 </td>
