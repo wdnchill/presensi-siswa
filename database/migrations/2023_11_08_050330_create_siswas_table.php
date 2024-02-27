@@ -16,8 +16,8 @@ return new class extends Migration
             $table->char('nisn',11);
             $table->char('nis',12);
             $table->string('nama_lengkap',50);
-            $table->enum('jenis_kelamin', ['Laki-Laki', 'Perempuan']);
-            $table->foreignId('kelas_id')->references('id')->on('kelas');
+            $table->enum('jenis_kelamin', ['L', 'P']);
+            $table->foreignId('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
             $table->timestamps();
         });
     }

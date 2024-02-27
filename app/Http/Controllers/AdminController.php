@@ -19,7 +19,13 @@ class AdminController extends Controller
         $kelas  = Kelas::count();
 
         $absensiHariIni = Presensi::whereDate('created_at', Carbon::today())->count();
-
-        return view('Layouts.index', compact('kelas', 'siswas', 'users', 'absensiHariIni'));
+    
+     
+        $sakitCount = Presensi::where('presensi', 'Sakit',Carbon::today())->count();
+        $izinCount = Presensi::where('presensi', 'Izin',Carbon::today())->count();
+        $alfaCount = Presensi::where('presensi', 'Alfa',Carbon::today())->count();
+        $hadirCount = Presensi::where('presensi', 'Hadir',Carbon::today())->count();
+       
+        return view('Layouts.index', compact('kelas', 'siswas', 'users', 'absensiHariIni', 'sakitCount', 'izinCount', 'alfaCount', 'hadirCount'));
     }
 }

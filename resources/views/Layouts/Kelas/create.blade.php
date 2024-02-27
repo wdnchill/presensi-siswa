@@ -8,10 +8,15 @@
 @section('content')
     <form action="{{ route('kelas.store') }}" method="post">
         @csrf
-        <div class="form-group mb-3">
-            <label for="nama">Kelas</label>
-            <input type="text" class="form-control" id="nama" name="kelas" placeholder="MASUKAN KELAS " required>
+
+        <div class="mb-3 row">
+            <label for="kelas" class="col-sm-2 col-form-label">KELAS</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="kelas" name="kelas" placeholder="MASUKAN KELAS"
+                    required>
+            </div>
         </div>
+
         <div class="mb-3 row">
             <div class="col-sm-2"></div>
             <div class="col-sm-10">

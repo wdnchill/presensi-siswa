@@ -6,8 +6,24 @@
 @section('sub-title')
     DATA USER
 @endsection
-<p class="mb-0">Regitrasi data </p>
-<a href="{{ route('user.create') }}" class="btn btn-success mb-2">TAMBAH DATA USER</a>
+<div class="row">
+    <div class="col-md-3 mt-3 mb-3">
+        <form action="{{ route('user.index') }}" method="GET">
+            <div class="form-group">
+                <select name="role" onchange="this.form.submit()" class="form-control">
+                    <option value="">Pilih Role</option>
+                    <option value="guru">Guru</option>
+                    <option value="admin">Admin</option>
+                    <option value="walas">Wali Kelas</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-9 text-md-right mt-3 mb-3">
+        <a href="{{ route('user.create') }}" class="btn btn-success"><i class="ti ti-plus"></i> TAMBAH USER</a>
+    </div>
+</div>
+
 <table class="table table-striped" id="tabledata" style="width:100%" cellspacing="0">
     <thead>
         <tr>

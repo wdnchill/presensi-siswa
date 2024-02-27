@@ -36,12 +36,12 @@
             <label class="col-sm-2 col-form-label">Jenis Kelamin :</label>
             <div class="col-sm-10">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="Laki-Laki" value="Laki-Laki">
-                    <label class="form-check-label" for="Laki-Laki">Laki-Laki</label>
+                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="L" value="L">
+                    <label class="form-check-label" for="L">Laki-Laki</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="Perempuan" value="Perempuan">
-                    <label class="form-check-label" for="Perempuan">Perempuan</label>
+                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="P" value="P">
+                    <label class="form-check-label" for="P">Perempuan</label>
                 </div>
             </div>
         </div>

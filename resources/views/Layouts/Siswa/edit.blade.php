@@ -38,13 +38,13 @@
             <label class="col-sm-2 col-form-label">Jenis Kelamin :</label>
             <div class="col-sm-10">
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" name="jenis_kelamin" id="L" value="Laki-Laki"
-                        required {{ $siswas->jenis_kelamin === 'Laki-Laki' ? 'checked' : '' }}>
+                    <input type="radio" class="form-check-input" name="jenis_kelamin" id="L" value="L"
+                        required {{ $siswas->jenis_kelamin === 'L' ? 'checked' : '' }}>
                     <label class="form-check-label" for="L">Laki-Laki</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" name="jenis_kelamin" id="P" value="Perempuan"
-                        required {{ $siswas->jenis_kelamin === 'Perempuan' ? 'checked' : '' }}>
+                    <input type="radio" class="form-check-input" name="jenis_kelamin" id="P" value="P"
+                        required {{ $siswas->jenis_kelamin === 'P' ? 'checked' : '' }}>
                     <label class="form-check-label" for="P">Perempuan</label>
                 </div>
             </div>

@@ -13,16 +13,16 @@ class QRCodeGeneratedListener
     {
         $kelas = $event->kelas;
 
-        // Generate QR code with dynamic class ID in the route
+       
         $qrCode = QrCode::format('png')->generate(url("/presensi/{$kelas->id}"));
 
-        // Define the output file path
+       
         $outputFile = '/qrCodekelas/qr-' . $kelas->id . '.png';
 
-        // Save the QR code to storage
+     
         Storage::disk('public')->put($outputFile, $qrCode);
 
-        // Update the QR code path in the Kelas model
+        
         $kelas->update(['qrCode' => $outputFile]);
     }
 }

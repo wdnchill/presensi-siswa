@@ -22,7 +22,6 @@ class QRCodeController extends Controller
         $kelas->update(['qrCode' => $outputFile]);
 
         event(new QRCodeGenerated($kelas));
-
-        return redirect()->route('kelas.index')->with(['success' => 'QR Code generated successfully']);
+        return redirect()->route('kelas.index');
     }
 }

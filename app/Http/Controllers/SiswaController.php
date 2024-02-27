@@ -30,24 +30,26 @@ class SiswaController extends Controller
     {
     
         $this->validate($request, [
-            'nisn' => 'required|numeric|digits:10',
-            'nis' => 'required|numeric|digits:9',
-            'nama_lengkap' => 'required',
-            'jenis_kelamin' => 'required',
-            'kelas_id' => 'required',
-        ], [
-            'nis.required' => 'Kolom NIS wajib diisi.',
-            'nis.numeric' => 'Kolom NIS harus berupa angka.',
-            'nis.digits' => 'Kolom NIS harus terdiri dari 9 digit angka.',
-            'nisn.required' => 'Kolom NISN wajib diisi.',
-            'nisn.numeric' => 'Kolom NISN harus berupa angka.',
-            'nisn.digits' => 'Kolom NISN harus terdiri dari 10 digit angka.',
-            'nama_lengkap.required' => 'Kolom Nama Lengkap wajib diisi.',
-            'jenis_kelamin.required' => 'Kolom Jenis Kelamin wajib diisi.',
-            'kelas_id.required' => 'Kolom Kelas wajib diisi.',
-            'kelas_id.numeric' => 'Kolom Kelas harus berupa angka.',
+    'nisn' => 'required|numeric|digits:10|unique:siswas,nisn',
+    'nis' => 'required|numeric|digits:9|unique:siswas,nis',
+    'nama_lengkap' => 'required',
+    'jenis_kelamin' => 'required',
+    'kelas_id' => 'required', 
+], [
+    'nis.required' => 'Kolom NIS wajib di isi.',
+    'nis.numeric' => 'Kolom NIS harus berupa angka.',
+    'nis.digits' => 'Kolom NIS harus terdiri dari 9 digit angka.',
+    'nisn.required' => 'Kolom NISN wajib di isi.',
+    'nis.unique' => 'NIS sudah terdaftar silahkan masukan nis lain.',
+    'nisn.unique' => 'NISN sudah terdaftar silahkan masukan nisn lain.',
+    'nisn.numeric' => 'Kolom NISN harus berupa angka.',
+    'nisn.digits' => 'Kolom NISN harus terdiri dari 10 digit angka.',
+    'nama_lengkap.required' => 'Kolom Nama Lengkap wajib diisi.',
+    'jenis_kelamin.required' => 'Kolom Jenis Kelamin wajib diisi.',
+    'kelas_id.required' => 'Kolom Kelas wajib diisi.',
+    'kelas_id.numeric' => 'Kolom Kelas harus berupa angka.',
+]);
 
-        ]);
 
         Siswa::create([
             'nisn' => $request->nisn,
@@ -56,8 +58,8 @@ class SiswaController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
             'kelas_id' => $request->kelas_id,
         ]);
-
-        return redirect()->route('siswa.index')->with(['success' => 'Data Berhasil Ditambahkan!']);
+         notyf()->position('x', 'right')->position('y', 'top')->addSuccess('Data siswa berhasil di tambahkan!');
+        return redirect()->route('siswa.index');
     }
 
     public function show(string $id)
@@ -75,12 +77,25 @@ class SiswaController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
-            'nis' => 'required|numeric|digits:9',
-            'nisn' => 'required|numeric|digits:10',
-            'nama_lengkap' => 'required',
-            'jenis_kelamin' => 'required',
-            'kelas_id' => 'required',
-        ]);
+    'nis' => 'required|numeric|digits:9|unique:siswas,nis,'. $id,
+    'nisn' => 'required|numeric|digits:10|unique:siswas,nisn,'. $id,
+    'nama_lengkap' => 'required',
+    'jenis_kelamin' => 'required',
+    'kelas_id' => 'required',
+], [
+    'nis.required' => 'Kolom NIS wajib diisi.',
+    'nis.numeric' => 'Kolom NIS harus berupa angka.',
+    'nis.digits' => 'Kolom NIS harus terdiri dari 9 digit angka.',
+    'nisn.required' => 'Kolom NISN wajib diisi.',
+    'nis.unique' => 'NISN sudah terdaftar silahkan masukan nisn lain..',
+    'nisn.unique' => 'NIS sudah terdaftar silahkan masukan nis lain..',
+    'nisn.numeric' => 'Kolom NISN harus berupa angka.',
+    'nisn.digits' => 'Kolom NISN harus terdiri dari 10 digit angka.',
+    'nama_lengkap.required' => 'Kolom Nama Lengkap wajib diisi.',
+    'jenis_kelamin.required' => 'Kolom Jenis Kelamin wajib diisi.',
+    'kelas_id.required' => 'Kolom Kelas wajib diisi.',
+]);
+
 
         $siswas = Siswa::findOrFail($id);
         $siswas->update([
@@ -90,22 +105,18 @@ class SiswaController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
             'kelas_id' => $request->kelas_id,
         ]);
-
-        return redirect()->route('siswa.index')->with(['success' => 'Data Berhasil Diubah!']);
+        notyf()->position('x', 'right')->position('y', 'top')->addSuccess('Data siswa berhasil di update!');
+        return redirect()->route('siswa.index');
     }
 
 public function destroy(string $id)
 {
     $siswa = Siswa::findOrFail($id);
     $presensiCount = $siswa->siswas()->count();
-    
-    if ($presensiCount > 0) {
-        return redirect()->back()->with(['error' => 'Tidak dapat menghapus data siswa karena ada data terkait dalam tabel presensi. Silahkan hapus data presensi yang berkaitan terlebih dahulu.']);
-    }
 
     $siswa->delete();
-
-    return redirect()->route('siswa.index')->with(['success' => 'Data Berhasil Dihapus!']);
+    notyf()->position('x', 'right')->position('y', 'top')->addSuccess('Data siswa berhasil di hapus!');
+    return redirect()->route('siswa.index');
 }
 
   
@@ -125,7 +136,7 @@ public function filterSiswa(Request $request)
        
         $siswas = Siswa::all();
     }
-
+    notyf()->position('x', 'right')->position('y', 'top')->addInfo('Filter data berhasil!');
     return view('Layouts.Siswa.index', compact('siswas', 'kelas'));
 }
 

@@ -9,10 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('Layouts.User.index', compact('users'));
+    $role = $request->input('role');
+
+   
+    $users = $role ? User::where('role', $role)->get() : User::all();
+
+    return view('Layouts.User.index', compact('users'));
+    
     }
 
     public function create()
@@ -22,18 +27,17 @@ class UserController extends Controller
 
     public function show()
     {
-        $users = User::all();
-        return view('Layouts.User.history', compact('users'));
+        
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:users,name',
             'email' => 'required|unique:users,email|email|max:50',
             'password' => 'required',
             'role' => 'required',
-            'username' => 'required',
+            'username' => 'required|unique:users,username',
             'imguser' => 'image|mimes:jpeg,jpg,png|max:2048',
         ], [
             'username.required' => 'Kolom username wajib diisi.',
@@ -41,6 +45,8 @@ class UserController extends Controller
             'name.required' => 'Kolom nama wajib diisi.',
             'email.required' => 'Kolom email wajib diisi.',
             'email.unique' => 'Email sudah terdaftar.',
+            'name.unique' => 'nama user sudah terdaftar.',
+            'username.unique' => 'username sudah terdaftar.',
             'email.email' => 'Format email tidak valid.',
             'email.max' => 'Email tidak boleh lebih dari 50 karakter.',
             'password.required' => 'Kolom kata sandi wajib diisi.',
@@ -51,7 +57,7 @@ class UserController extends Controller
 
         
         if ($request->hasFile('imguser')) {
-            $imguserPath = $request->file('imguser')->store('images');
+            $imguserPath = $request->file('imguser')->store('images','public');
         }
 
 
@@ -64,7 +70,9 @@ class UserController extends Controller
             'imguser' => $imguserPath ?? null,
         ]);
 
-        return redirect()->route('user.index')->with(['success' => 'Data Berhasil Ditambahkan!']);
+        notyf()->position('x', 'right')->position('y', 'top')->addSuccess('Data user berhasil di tambahkan!');
+
+        return redirect()->route('user.index');
     }
 
     public function edit($id)
@@ -79,14 +87,27 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users,email,' . $id . '|email|max:50',
             'password' => 'nullable',
-            'username' => 'required',
+            'username' => 'required|unique:users,username,' . $id . '|max:50',
             'imguser' => 'image|mimes:jpeg,jpg,png|max:2048',
+        ],[
+           'username.required' => 'Kolom username wajib diisi.',
+        'role.required' => 'Kolom role wajib diisi.',
+        'name.required' => 'Kolom nama wajib diisi.',
+        'email.required' => 'Kolom email wajib diisi.',
+        'email.unique' => 'Email sudah terdaftar.',
+        'username.unique' => 'Username sudah terdaftar.',
+        'email.email' => 'Format email tidak valid.',
+        'email.max' => 'Email tidak boleh lebih dari 50 karakter.',
+        'username.max' => 'Username tidak boleh lebih dari 50 karakter.',
+        'imguser.image' => 'Berkas yang diunggah harus berupa gambar.',
+        'imguser.mimes' => 'Format gambar yang diizinkan adalah jpeg, jpg, dan png.',
+        'imguser.max' => 'Gambar tidak boleh lebih dari 2048 kilobita.',
         ]);
 
         $user = User::findOrFail($id);
 
         if ($request->hasFile('imguser')) {
-            $imguserPath = $request->file('imguser')->store('images');
+            $imguserPath = $request->file('imguser')->store('images','public');
             
                if ($user->imguser) {
                 Storage::delete($user->imguser);
@@ -102,18 +123,15 @@ class UserController extends Controller
             'imguser' => $imguserPath ?? $user->imguser,
         ]);
 
-        return redirect()->route('user.index')->with(['success' => 'Data Berhasil Diubah!']);
+         notyf()->position('x', 'right')->position('y', 'top')->addSuccess('Data user berhasil di update!');
+
+        return redirect()->route('user.index');
     }
 
     public function destroy($id)
     {
         $user = User::findOrFail($id);
 
-        
-        $presensiCount = $user->presensi()->count();
-        if ($presensiCount > 0) {
-            return redirect()->back()->with(['error' => 'Tidak dapat menghapus pengguna karena ada data terkait dalam tabel presensi.']);
-        }
 
         if ($user->imguser) {
             Storage::delete($user->imguser);
@@ -121,6 +139,8 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('user.index')->with(['success' => 'Data Berhasil Dihapus!']);
+          notyf()->position('x', 'right')->position('y', 'top')->addSuccess('Data user berhasil di hapus!');
+
+        return redirect()->route('user.index');
     }
 }

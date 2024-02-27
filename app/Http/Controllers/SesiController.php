@@ -10,8 +10,10 @@ class SesiController extends Controller
 {
     public function index()
     {
+        
         return view('Layouts.auth.login');
     }
+    
 
     public function login(Request $request)
     {
@@ -20,38 +22,38 @@ class SesiController extends Controller
             'password' => 'required',
         ], [
             'username_or_email.required' => 'USERNAME ATAU EMAIL TIDAK BOLEH KOSONG!',
-            'password.required' => 'PASSWORD TIDAK BOLEH KOSONG ! ',
+            'password.required' => 'PASSWORD TIDAK BOLEH KOSONG!',
         ]);
 
-        $usernameOrEmail = $request->username_or_email;
-        $password = $request->password;
+        $credentials = $request->only('username_or_email', 'password');
 
-        // Attempt to authenticate using email
-        if (Auth::attempt(['email' => $usernameOrEmail, 'password' => $password])) {
+        if (Auth::attempt(['email' => $credentials['username_or_email'], 'password' => $credentials['password']]) ||
+            Auth::attempt(['username' => $credentials['username_or_email'], 'password' => $credentials['password']])) {
             return $this->redirectBasedOnRole();
         }
 
-        // Attempt to authenticate using username
-        if (Auth::attempt(['username' => $usernameOrEmail, 'password' => $password])) {
-            return $this->redirectBasedOnRole();
-        }
+        // Jika otentikasi gagal, tampilkan pesan kesalahan yang sesuai
+        notyf()->duration(10000)->position('x', 'right')->position('y', 'top')->dismissible(true)->addError('Email, username, atau password salah!');
 
-        return redirect()->route('login')->withErrors('Username atau email dan password tidak sesuai!')->withInput();
+        return redirect()->route('login')->withInput();
     }
 
     private function redirectBasedOnRole()
     {
         if (Auth::user()->role == 'admin' || Auth::user()->role == 'walas' || Auth::user()->role == 'guru') {
-          
-            session()->flash('success', 'Selamat datang, ' . Auth::user()->name . '!');
+            notyf()->duration(10000)->position('x', 'right')->position('y', 'top')->dismissible(true)->addSuccess('Selamat datang, ' . Auth::user()->name . '!');
+
             return redirect('');
         }
+
     }
 
-   public function logout()
-{
-    auth()->logout(); 
-    return redirect('');
-}
+    public function logout()
+    {
+        auth()->logout();
 
+        notyf()->duration(2000)->position('x', 'center')->position('y', 'top')->addSuccess('Anda telah berhasil logout!');
+
+        return redirect(''); 
+    }
 }

@@ -4,9 +4,9 @@
 @endsection
 @section('content')
 @section('sub-title')
-    TABLE DATA KELAS
+     DATA KELAS
 @endsection
-<a href="{{ route('kelas.create') }}" class="btn btn-success btn-sm mb-2"><i class="ti ti-plus"></i>TAMBAH DATA KELAS</a>
+<a href="{{ route('kelas.create') }}" class="btn btn-success mb-2"><i class="ti ti-plus"></i>TAMBAH KELAS</a>
 <table class="table table-striped" id="tabledata" style="width:100%" cellspacing="0">
     <thead>
         <tr>

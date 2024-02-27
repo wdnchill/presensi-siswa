@@ -2,7 +2,7 @@
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="/" class="text-nowrap logo-img position-relative mt-2 mx-auto">
-                <img src="{{ asset('assets/images/logos/logo.png') }}" width="130px" alt="" />
+                <img src="{{ asset('assets/images/logos/logo.webp') }}" width="130px" alt="logo" />
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                 <i class="ti ti-x fs-8"></i>
@@ -80,7 +80,7 @@
                         <span class="hide-menu">AUTH</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#" aria-expanded="true"
+                        <a class="sidebar-link" href="javascript:void(0)" aria-expanded="true"
                             onclick="modal_logout()">
                             <span>
                                 <i class="ti ti-logout"></i>
@@ -126,7 +126,7 @@
             <span class="hide-menu">AUTH</span>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="#" aria-expanded="true" onclick="modal_logout()">
+            <a class="sidebar-link" href="javascript:void(0)" aria-expanded="true" onclick="modal_logout()">
                 <span>
                     <i class="ti ti-logout"></i>
                 </span>

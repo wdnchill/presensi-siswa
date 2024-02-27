@@ -42,15 +42,10 @@ class PresensiController extends Controller
         ], [
             'presensi.required' => 'Kolom Presensi wajib diisi.',
             'presensi.*.required' => 'Kolom Presensi untuk setiap siswa wajib diisi.',
-            'presensi.*.in' => 'Kolom Presensi untuk setiap siswa harus berisi Hadir, Alfa, Sakit, atau Izin.',
-
+            'presensi.*.in' => 'Kolom Presensi untuk setiap siswa harus berisi hadir, alfa, sakit, atau izin.',
+            'mapel_id.required' => 'Silahkan pilih Matapelajaran terlebih dahulu sebelum melakukan presensi.',
         ]);
 
-        if ($request->mapel_id == 'Pilih Mata pelajaran' || count($request->presensi) === 0) {
-            return redirect()->route('presensi.create')->with([
-                'error' => 'Kolom Matapelajaran  wajib diisi.'
-            ])->withInput();
-        }
 
         foreach ($request->presensi as $siswa_id => $presensi) {
             Presensi::create([
@@ -61,8 +56,8 @@ class PresensiController extends Controller
                 'presensi' => $presensi,
             ]);
         }
-
-        return redirect()->route('laporan')->with(['success' => 'Data Berhasil Ditambahkan!']);
+        notyf()->position('x', 'right')->position('y', 'top')->addSuccess('Data Berhasil Ditambahkan!');
+        return redirect()->route('laporan');
     }
 
 
@@ -73,7 +68,6 @@ class PresensiController extends Controller
         $users = User::all();
         $mapel = Mapel::all();
 
-
         return view('Layouts.Presensi.create', compact('kelas', 'siswas', 'users', 'mapel'));
     }
 
@@ -82,10 +76,10 @@ class PresensiController extends Controller
     public function edit($id)
     {
         $presensi = Presensi::with('siswas', 'kelas')->findOrFail($id);
-        $users = User::all();
         $kelas = Kelas::all();
         $siswas = Siswa::all();
         $mapel = Mapel::all();
+        $users = User::all();
         return view('Layouts.Presensi.edit', compact('presensi', 'siswas', 'kelas', 'users', 'mapel'));
     }
 
@@ -108,8 +102,8 @@ class PresensiController extends Controller
             'siswa_id' => $request->siswa_id,
             'mapel_id' => $request->mapel_id,
         ]);
-
-        return redirect()->route('laporan')->with(['success' => 'Data Berhasil Diubah!']);
+        notyf()->position('x', 'right')->position('y', 'top')->addSuccess('Data Berhasil Diupdate!');
+        return redirect()->route('laporan');
     }
 
     public function destroy(string $id)
@@ -117,8 +111,8 @@ class PresensiController extends Controller
         $presensi = Presensi::findOrFail($id);
 
         $presensi->delete();
-
-        return redirect()->route('laporan')->with(['success' => 'Data Berhasil Dihapus!']);
+        notyf()->position('x', 'right')->position('y', 'top')->addSuccess('Data Berhasil Dihapus!');
+        return redirect()->route('laporan');
     }
 
 
@@ -168,7 +162,7 @@ class PresensiController extends Controller
         $presensis = $presensiQuery
             ->orderBy('created_at')
             ->get();
-
+           notyf()->position('x', 'right')->position('y', 'top')->addInfo('Data Berhasil Difilter!');
         return view('Layouts.Presensi.laporan', compact('presensis', 'kelas'));
     }
 }
