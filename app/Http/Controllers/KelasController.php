@@ -109,7 +109,6 @@ class KelasController extends Controller
 
         $kelas->delete();
 
-        // Tampilkan notifikasi menggunakan Flasher Notyf
         notyf()->position('x', 'right')->position('y', 'top')->addSuccess('Data kelas berhasil di hapus!');
 
         return redirect()->route('kelas.index');

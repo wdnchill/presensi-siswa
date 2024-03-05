@@ -11,7 +11,7 @@ class Mapel extends Model
 
         protected $fillable = ['namaMapel'];
 
- public function mapels()
+    public function mapels()
     {
         return $this->hasMany(Presensi::class, 'mapel_id');
     }

@@ -66,10 +66,11 @@
     $(document).ready(function () {
     $('#tabledata').DataTable({
         responsive: true,
-        lengthChange: true,
+        lengthChange: false,
         searching: true,
         paging: true,
-        ordering: true,
+        ordering: false,
+        info : false,
         dom: 'Bfrtip',
         language: {
             emptyTable: "Data belum di masukan, silahkan input data terlebih dahulu."

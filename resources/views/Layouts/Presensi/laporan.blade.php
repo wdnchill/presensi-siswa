@@ -38,9 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
+        <div class="col-md-5">
                     <table class="table table-striped" id="tabledata" style="width:100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -82,8 +80,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-            </div>
         </div>
     </div>
 </div>
