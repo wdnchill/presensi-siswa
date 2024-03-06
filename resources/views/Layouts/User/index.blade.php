@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<table class="table table-striped" id="tabledata" style="width:100%" cellspacing="0">
+<table class="table table-striped" id="tabledata2" style="width:100%" cellspacing="0">
     <thead>
         <tr>
             <th>No</th>

@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="col-md-5">
-                    <table class="table table-striped" id="tabledata" style="width:100%" cellspacing="0">
+                    <table class="table table-striped" id="tabledata" >
                         <thead>
                             <tr>
                                 <th>No</th>

@@ -7,7 +7,7 @@
      DATA KELAS
 @endsection
 <a href="{{ route('kelas.create') }}" class="btn btn-success mb-2"><i class="ti ti-plus"></i>TAMBAH KELAS</a>
-<table class="table table-striped" id="tabledata" style="width:100%" cellspacing="0">
+<table class="table table-striped" id="tabledata2" style="width:100%" cellspacing="0">
     <thead>
         <tr>
             <th>No</th>

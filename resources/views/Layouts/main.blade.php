@@ -75,30 +75,39 @@
         language: {
             emptyTable: "Data belum di masukan, silahkan input data terlebih dahulu."
         },
-        columnDefs:[{
-            targets:-1,
-            className:'noExport'
-        }],
         buttons: [
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: ":visible:not(.noExport)"
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7,8],
                 },
             },
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: ":visible:not(.noExport)"
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7,8],
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: ":visible:not(.noExport)"
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7,8],
                 }
             }
         ]
+    });
+});
+$(document).ready(function () {
+    $('#tabledata2').DataTable({
+        responsive: true,
+        lengthChange: false,
+        searching: true,
+        paging: true,
+        ordering: false,
+        info : false,
+        language: {
+            emptyTable: "Data belum di masukan, silahkan input data terlebih dahulu."
+        },
     });
 });
     $(document).ready(function() {
